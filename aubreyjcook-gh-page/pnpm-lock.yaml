@@ -20,6 +20,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      tw-elements:
+        specifier: ^2.0.0
+        version: 2.0.0
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -1680,6 +1683,9 @@ packages:
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+
+  tw-elements@2.0.0:
+    resolution: {integrity: sha512-aiitkqzmCZIZ9zJr3V6ErVzU/CrKoAkptpv94t0pEKnVn2Ah4jOplXOO/v6Fo9jr3PoTA5dxvlyS4w8rnW/iag==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -3585,6 +3591,8 @@ snapshots:
       strip-bom: 3.0.0
 
   tslib@2.8.1: {}
+
+  tw-elements@2.0.0: {}
 
   type-check@0.4.0:
     dependencies:

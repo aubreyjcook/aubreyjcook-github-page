@@ -1,0 +1,12 @@
+*{
+    text-align: center;
+    background-color: #000000;
+    color: white;
+}
+
+body {
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+p,h1,h2,h3,h4,h5,h6{
+
+}

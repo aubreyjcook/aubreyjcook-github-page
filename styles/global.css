@@ -8,11 +8,6 @@ body {
     font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 }
 
-.header a {
-  color: inherit;
-  text-decoration: none;
-}
-
 p,h1,h2,h3,h4,h5,h6{
 
 }

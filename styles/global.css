@@ -16,3 +16,12 @@ body {
 p,h1,h2,h3,h4,h5,h6{
 
 }
+
+/*vanilla util classes*/
+
+.gray-to-white-gradient {
+    background: linear-gradient(to right, gray, white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}

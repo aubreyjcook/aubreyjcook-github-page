@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>JavaScript DOM</title>
+    <meta name="description" content="">
+    <meta name="author" content="Aubrey J Cook">
+
+    <!-- Meta Data
+  -------------------------------------------------- -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Prompt|Righteous" rel="stylesheet">
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="js/javascript.js"></script>
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>JavaScript DOM</h1>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="row">
+                <div class="twelve columns">
+                    <p>Using JavaScript DOM.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns" id="panelsContainer">
+                    <h2 class="open" id="one">
+                        <i class="material-icons" id="i-one">add</i>
+                        Terracotta Army
+                    </h2>
+                    <div class="close">
+                        <img src="images/terracottaArmy.jpg"/>
+                        <p>The Terracotta Army was discovered in 1974 during an archaeological dig. The Terrcotta Army is comprised of many thousands of clay soldiers that were created sometime during 300-200 BC. The figures were made to commemorate the death of China's first Emperor.</p>
+                    </div>
+                    
+                    <h2 class="open" id="two">
+                        <i class="material-icons" id="i-two">add</i>
+                        Hanging Gardens of Babylon
+                    </h2>
+                    <div class="close">
+                        <p>According to legend, the Hanging Gardens were built during the rule of Nebuchadnezzar II sometime past 600 BC. What is unique about the Hanging Gardens is they are the only Ancient Wonder of the world that has not been discovered and indicated as a specific archeological site yet. This has led to some archeological and historical scholars to believe the site was only a mythical concept attributed to the Babylonian king.</p>
+                    </div>
+                    
+                    <h2 class="open" id="three">
+                        <i class="material-icons" id="i-three">add</i>
+                        Louvre Museum
+                    </h2>
+                    <div class="close">
+                       <img src="images/louvreMuseum.jpg"/>
+                        <p>Located in Paris, France, the Louvre Museum is the largest museum in the entire world. The building was started as a military defensive structure in the 12th century, but was continuously extended throughout the years. Much of the original medieval structures the Louvre are based on are still part of the building. The museum itself houses countless works of art and historical artifacts.</p>
+                    </div>
+                    
+                    <h2 class="open" id="four">
+                        <i class="material-icons" id="i-four">add</i>
+                        Pharos of Alexandria
+                    </h2>
+                    <div class="close">
+                        <p>Constructed sometime after 280 BC. the great lighthouse of Alexandria was one of the tallest man made buildings ever made. Pieces of this great wonder still rest in the harbor of Alexandria.</p>
+                    </div>
+                    
+                    <h2 class="open" id="five">
+                        <i class="material-icons" id="i-five">add</i>
+                        Statue of Liberty
+                    </h2>
+                    <div class="close">
+                        <img src="images/statueOfLiberty.jpg"/>
+                        <p>Built in 1886, the Statue of Liberty is a copper statue standing on Liberty Island, a symbol of American independence for over a hundred years. The entire statue is measured to stand over 150 feet tall.</p>
+                    </div>
+                    
+                    <h2 class="open" id="six">
+                        <i class="material-icons" id="i-six">add</i>
+                        Machu Picchu
+                    </h2>
+                    <div class="close">
+                        <img src="images/machuPicchu.jpg"/>
+                        <p>Built by the Inca in the 15th century, but abandoned after a hundred years, Machu Picchu was an estate high up on a mountain ridge. Machu Picchu is characterized by the step-like structures the city is built on.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="row">
+                <div class="twelve columns">
+                    <a href="../index.html" class="button"> &#10096; PRG 147 index</a>
+                    <a href="http://aubreyjcook.com/" target="_blank">
+                        <h5>&copy; Aubrey J Cook, 2016</h5>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>

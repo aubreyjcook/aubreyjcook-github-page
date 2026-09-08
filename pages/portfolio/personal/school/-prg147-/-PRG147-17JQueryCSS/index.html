@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>JQuery CSS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Aubrey J Cook">
+
+    <!-- Meta Data
+  -------------------------------------------------- -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Prompt|Righteous" rel="stylesheet">
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/javascript.js"></script>
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>JQuery CSS</h1>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="row">
+                <div class="twelve columns">
+                    <p>Using JQuery to modify CSS</p>
+                    <button id="revert">Revert all modifications</button>
+                    <button id="selfDestruct">Self-Destruct Button! Press at your own Peril! (Page Reload may be required)</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <h6>Click these bars to turn them over and restack them</h6>
+                    <div id="red" class="colorBar"></div>
+                    <div id="green" class="colorBar"></div>
+                    <div id="blue" class="colorBar"></div>
+                </div>
+                <div class="six columns">
+                    <h6>Not digging the direction of this gradient? Click it to flip it!</h6>
+                    <div id="gradient"></div>
+                </div>
+                <div class="twelve columns">
+                    <h6 id="marxHeader">Here's what Marx had to say about labor, but what about Adam Smith... Click this paragraph to find out.</h6>
+                    <h6 id="smithHeader" class="hiddenText">Here's what Smith had to say about labor, but what about Marx... Click this paragraph to find out.</h6>
+                    <p id="marxText">The value of labour-power is determined, as in the case of every other commodity, by the labour-time necessary for the production, and consequently also the reproduction, of this special article. So far as it has value, it represents no more than a definite quantity of the average labour of society incorporated in it. Labour-power exists only as a capacity, or power of the living individual. Its production consequently pre-supposes his existence. Given the individual, the production of labour-power consists in his reproduction of himself or his maintenance. For his maintenance he requires a given quantity of the means of subsistence. Therefore the labour-time requisite for the production of labour-power reduces itself to that necessary for the production of those means of subsistence; in other words, the value of labour-power is the value of the means of subsistence necessary for the maintenance of the labourer. Labour-power, however, becomes a reality only by its exercise; it sets itself in action only by working. But thereby a definite quantity of human muscle, nerve, brain, c., is wasted, and these require to be restored. This increased expenditure demands a larger income. If the owner of labour-power works to-day, to-morrow he must again be able to repeat the same process in the same conditions as regards health and strength. His means of subsistence must therefore be sufficient to maintain him in his normal state as a labouring individual. His natural wants, such as food, clothing, fuel, and housing, vary according to the climatic and other physical conditions of his country. On the other hand, the number and extent of his so-called necessary wants, as also the modes of satisfying them, are themselves the product of historical development, and depend therefore to a great extent on the degree of civilisation of a country, more particularly on the conditions under which, and consequently on the habits and degree of comfort in which, the class of free labourers has been formed. In contradistinction therefore to the case of other commodities, there enters into the determination of the value of labour-power a historical and moral element. Nevertheless, in a given country, at a given period, the average quantity of the means of subsistence necessary for the labourer is practically known. </p>
+                    <p id="smithText" class="hiddenText">It is the great multiplication of the productions of all the different arts, in consequence of the division of labour, which occasions, in a well-governed society, that universal opulence which extends itself to the lowest ranks of the people. Every workman has a great quantity of his own work to dispose of beyond what he himself has occasion for; and every other workman being exactly in the same situation, he is enabled to exchange a great quantity of his own goods for a great quantity, or, what comes to the same thing, for the price of a great quantity of theirs. He supplies them abundantly with what they have occasion for, and they accommodate him as amply with what he has occasion for, and a general plenty diffuses itself through all the different ranks of the society. </p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="row">
+                <div class="twelve columns">
+                    <a href="../index.html" class="button"> &#10096; PRG 147 index</a>
+                    <a href="http://aubreyjcook.com/" target="_blank">
+                        <h5>&copy; Aubrey J Cook, 2016</h5>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>

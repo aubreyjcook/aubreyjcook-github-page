@@ -1,0 +1,85 @@
+/* Fonts
+    Headers: font-family: 'Righteous', cursive;
+    Paragraphs: font-family: 'Prompt', sans-serif;
+*/
+
+/* colors
+
+*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+html {
+    
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: black;
+    padding: 5px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Righteous', cursive;
+    color: white;
+}
+
+p {
+    font-family: 'Prompt', sans-serif;
+}
+
+a  {
+    text-decoration: none;
+    color: deepskyblue;
+    font-size: 24px;
+}
+
+a:hover {
+    color: aliceblue;
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    padding: 5px;
+}
+
+ul {
+    list-style: none;
+}
+
+footer h5 {
+    float: right;
+}
+
+.button {
+    background-color: rgb(33, 33, 33);
+    color: ghostwhite;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 3px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: lightyellow;
+    color: midnightblue;
+}
+
+#one, #two, #three, #four {
+    margin: 5px;
+    padding: 5px;
+    background-color: darkslategray;
+    border: 5px solid darkslategray;
+    border-radius: 3px;
+}

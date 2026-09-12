@@ -2,25 +2,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../styles/global.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<span class="header">
-    <h1><a href="../index.html" class="gray-to-white-gradient">Aubrey J Cook</a></h1>
-  <h2>Programmer</h2>
+<body class="bg-slate-900 text-slate-100 flex flex-col min-h-screen">
+<span class="header flex flex-col items-center justify-center p-4">
+  <h1 class="text-4xl font-bold">
+    <a href="../index.html">Aubrey J Cook</a>
+  </h1>
+  <h2 class="text-xl font-semibold">Programmer</h2>
 </span>
 <hr>
-<span class="nav"><a href="../index.html">Home</a> | <a href="pages/experience.html">Experience</a> | <a href="pages/education.html">Education</a> | <a href="pages/resume.html">Resume</a></span>
+<span class="nav flex flex-wrap justify-center p-4">
+  <a href="../index.html" class="mx-2 hover:underline">Home</a> | 
+  <a href="pages/portfolio.html" class="mx-2 hover:underline">Portfolio</a> | 
+  <a href="pages/experience.html" class="mx-2 hover:underline">Experience</a> | 
+  <a href="pages/education.html" class="mx-2 hover:underline">Education</a> | 
+  <a href="pages/resume.html" class="mx-2 hover:underline">Resume</a>
+</span>
 <hr>
-<span class="main"></span>
+<span class="main p-4"></span>
 <hr>
-<span class="footer">
-  <p>
+<span class="footer flex flex-col items-center justify-center p-4">
+  <p class="text-sm">
     <a href="https://github.com/aubreyjcook" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/aubrey-cook-9b6922152/">LinkedIn</a> |
     <a href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
   </p>
   <hr>
-  <h6>"Computers are like old testament gods. Lots of rules, and no mercy."</h6>
+  <h6 class="text-lg italic">"Computers are like old testament gods. Lots of rules, and no mercy."</h6>
 </span>
 </body>

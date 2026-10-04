@@ -1,43 +1,96 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Aubrey J Cook</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../styles/site.css">
 </head>
-<body class="bg-black text-slate-100 flex flex-col min-h-screen">
-<span class="header flex flex-col items-center justify-center p-4">
-  <h1 class="text-4xl text-slate-300 font-bold">
-    <a href="../index.html">Aubrey J Cook</a>
-  </h1>
-  <h2 class="text-xl font-semibold">Programmer</h2>
-</span>
-<hr>
-<span class="nav flex flex-wrap justify-center p-4 text-slate-400">
-  <a href="../index.html" class="mx-2 hover:underline">Home</a> | 
-  <a href="../pages/portfolio.html" class="mx-2 hover:underline">Portfolio</a> | 
-  <a href="../pages/experience.html" class="mx-2 hover:underline">Experience</a> | 
-  <a href="../pages/education.html" class="mx-2 hover:underline">Education</a> | 
-  <a href="../pages/resume.html" class="mx-2 hover:underline">Resume</a>
-</span>
-<hr>
-<span class="main justify-center p-4">
-    <h2><a href="../files/Aubrey_Cook_Resume dotcom-001.pdf" target="_blank">Resume (PDF)</a></h2>
-  <hr>
-    <h3>Work Experience</h3>
-<hr>
-  <span class="experience-item">
-      <h4>Center for Inquiry</h4>
-      <p>Position: Web Content Coordinator</p>
-      <p>Dates: May 2022 - Present</p>
-  </span>
-</span>
-<hr>
-<span class="footer flex flex-col items-center justify-center p-4">
-  <p class="text-md text-slate-400">
-    <a href="https://github.com/aubreyjcook" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/aubrey-cook-9b6922152/">LinkedIn</a> |
-    <a href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
-  </p>
-  <hr>
-  <h6 class="text-sm italic">"Computers are like old testament gods. Lots of rules, and no mercy."</h6>
-</span>
+<body class="flex min-h-screen flex-col bg-zinc-950 font-sans text-slate-100 antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-black">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/85 backdrop-blur">
+    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
+      <a href="../index.html" class="min-w-0">
+        <span class="block text-lg font-bold tracking-tight text-slate-100">Aubrey J Cook</span>
+        <span class="block text-[11px] uppercase tracking-[0.22em] text-slate-500">Programmer</span>
+      </a>
+      <nav class="hidden items-center gap-6 text-sm md:flex" aria-label="Primary">
+        <a href="../index.html" class="text-slate-400 transition hover:text-slate-100">Home</a>
+        <a href="portfolio.html" class="text-slate-400 transition hover:text-slate-100">Portfolio</a>
+        <a href="experience.html" class="text-slate-400 transition hover:text-slate-100">Experience</a>
+        <a href="education.html" class="text-slate-400 transition hover:text-slate-100">Education</a>
+        <a href="resume.html" class="text-cyan-400" aria-current="page">Resume</a>
+      </nav>
+      <button type="button" id="nav-toggle" class="inline-flex items-center justify-center rounded-md border border-zinc-700 p-2 text-slate-300 md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-zinc-800 px-4 py-3 md:hidden" aria-label="Mobile">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 text-sm">
+        <a href="../index.html" class="text-slate-400">Home</a>
+        <a href="portfolio.html" class="text-slate-400">Portfolio</a>
+        <a href="experience.html" class="text-slate-400">Experience</a>
+        <a href="education.html" class="text-slate-400">Education</a>
+        <a href="resume.html" class="text-cyan-400" aria-current="page">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 md:py-16">
+    <div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+      <h1 class="text-3xl font-bold tracking-tight text-slate-100">Resume</h1>
+      <a href="../files/Aubrey_Cook_Resume dotcom-001.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-md bg-cyan-400 px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-300">Download PDF</a>
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Work experience</h2>
+      <article class="mt-6 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+        <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+          <h3 class="text-lg font-semibold text-slate-100">Center for Inquiry</h3>
+          <p class="text-sm text-slate-500">May 2022 — Present</p>
+        </div>
+        <p class="mt-1 text-sm text-cyan-400/90">Web Content Coordinator</p>
+        <p class="mt-4 text-sm leading-relaxed text-slate-300">Web programming and content work across WordPress multisite properties and related static sites, including Center for Inquiry, Skeptical Inquirer, and CSI Conference.</p>
+      </article>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Education</h2>
+      <ul class="mt-6 space-y-4 text-sm text-slate-300">
+        <li class="rounded-xl border border-zinc-800 bg-zinc-900/40 px-5 py-4">Associate's degree in General Education — McHenry County College</li>
+        <li class="rounded-xl border border-zinc-800 bg-zinc-900/40 px-5 py-4">Computer Science coursework — University of Illinois Springfield</li>
+        <li class="rounded-xl border border-zinc-800 bg-zinc-900/40 px-5 py-4">GED — Illinois, 2006</li>
+      </ul>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Skills</h2>
+      <ul class="mt-6 flex flex-wrap gap-2">
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">TypeScript</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">JavaScript</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">React</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">Next.js</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">Tailwind CSS</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">PHP</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">WordPress</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">Gatsby</li>
+        <li class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-slate-300">Rust</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-800">
+    <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-8 text-center">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-slate-400">
+        <a class="transition hover:text-cyan-400" href="https://github.com/aubreyjcook" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="transition hover:text-cyan-400" href="https://www.linkedin.com/in/aubrey-cook-9b6922152/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="transition hover:text-cyan-400" href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
+      </div>
+      <p class="text-xs italic text-slate-500">“Computers are like old testament gods. Lots of rules, and no mercy.”</p>
+    </div>
+  </footer>
+  <script src="../js/site.js"></script>
 </body>
+</html>

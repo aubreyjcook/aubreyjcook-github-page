@@ -1,38 +1,77 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education — Aubrey J Cook</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../styles/site.css">
 </head>
-<body class="bg-black text-slate-100 flex flex-col min-h-screen">
-<span class="header flex flex-col items-center justify-center p-4">
-  <h1 class="text-4xl text-slate-300 font-bold">
-    <a href="../index.html">Aubrey J Cook</a>
-  </h1>
-  <h2 class="text-xl font-semibold">Programmer</h2>
-</span>
-<hr>
-<span class="nav flex flex-wrap justify-center p-4 text-slate-400">
-  <a href="../index.html" class="mx-2 hover:underline">Home</a> | 
-  <a href="../pages/portfolio.html" class="mx-2 hover:underline">Portfolio</a> | 
-  <a href="../pages/experience.html" class="mx-2 hover:underline">Experience</a> | 
-  <a href="../pages/education.html" class="mx-2 hover:underline">Education</a> | 
-  <a href="../pages/resume.html" class="mx-2 hover:underline">Resume</a>
-</span>
-<hr>
-<span class="main justify-center p-4">
-  <p>Aubrey obtained a GED at the age of 16, in the year 2006, scoring in the top first percentile of those obtaining one in Illinois that year.</p>
-<p>Aubrey attended Lincoln's Challenge Academy in 2006, a specialized educational institution for at-risk students. At the academy, Aubrey excelled as a cadet, and earned recognition as the Valedictorian of his graduating class. This period of Aubrey's early life shaped his academic and personal development strongly.</p>
-<p>Aubrey later attended Mchenry County Community College, beginning with a declaration in an Associate's of Science, before eventually graduating with an Associate's degree in General Education.</p>
-<p>Aubrey eventually attended the University of Illinois Springfield, working on a Bachelor's degree in Computer Science, but did not complete it.</p>
-</span>
-<hr>
-<span class="footer flex flex-col items-center justify-center p-4">
-  <p class="text-md text-slate-400">
-    <a href="https://github.com/aubreyjcook" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/aubrey-cook-9b6922152/">LinkedIn</a> |
-    <a href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
-  </p>
-  <hr>
-  <h6 class="text-sm italic">"Computers are like old testament gods. Lots of rules, and no mercy."</h6>
-</span>
+<body class="flex min-h-screen flex-col bg-zinc-950 font-sans text-slate-100 antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-black">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/85 backdrop-blur">
+    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
+      <a href="../index.html" class="min-w-0">
+        <span class="block text-lg font-bold tracking-tight text-slate-100">Aubrey J Cook</span>
+        <span class="block text-[11px] uppercase tracking-[0.22em] text-slate-500">Programmer</span>
+      </a>
+      <nav class="hidden items-center gap-6 text-sm md:flex" aria-label="Primary">
+        <a href="../index.html" class="text-slate-400 transition hover:text-slate-100">Home</a>
+        <a href="portfolio.html" class="text-slate-400 transition hover:text-slate-100">Portfolio</a>
+        <a href="experience.html" class="text-slate-400 transition hover:text-slate-100">Experience</a>
+        <a href="education.html" class="text-cyan-400" aria-current="page">Education</a>
+        <a href="resume.html" class="text-slate-400 transition hover:text-slate-100">Resume</a>
+      </nav>
+      <button type="button" id="nav-toggle" class="inline-flex items-center justify-center rounded-md border border-zinc-700 p-2 text-slate-300 md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-zinc-800 px-4 py-3 md:hidden" aria-label="Mobile">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 text-sm">
+        <a href="../index.html" class="text-slate-400">Home</a>
+        <a href="portfolio.html" class="text-slate-400">Portfolio</a>
+        <a href="experience.html" class="text-slate-400">Experience</a>
+        <a href="education.html" class="text-cyan-400" aria-current="page">Education</a>
+        <a href="resume.html" class="text-slate-400">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 md:py-16">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-100">Education</h1>
+    <div class="mt-10 space-y-6">
+      <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+        <p class="text-xs uppercase tracking-[0.16em] text-slate-500">2006</p>
+        <h2 class="mt-2 text-lg font-semibold text-slate-100">GED</h2>
+        <p class="mt-3 text-sm leading-relaxed text-slate-300">Aubrey obtained a GED at the age of 16, in the year 2006, scoring in the top first percentile of those obtaining one in Illinois that year.</p>
+      </article>
+      <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+        <p class="text-xs uppercase tracking-[0.16em] text-slate-500">2006</p>
+        <h2 class="mt-2 text-lg font-semibold text-slate-100">Lincoln's Challenge Academy</h2>
+        <p class="mt-3 text-sm leading-relaxed text-slate-300">Aubrey attended Lincoln's Challenge Academy in 2006, a specialized educational institution for at-risk students. At the academy, Aubrey excelled as a cadet, and earned recognition as the Valedictorian of the graduating class. This period of Aubrey's early life shaped academic and personal development strongly.</p>
+      </article>
+      <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+        <h2 class="text-lg font-semibold text-slate-100">McHenry County College</h2>
+        <p class="mt-3 text-sm leading-relaxed text-slate-300">Aubrey later attended McHenry County College, beginning with a declaration in an Associate's of Science, before eventually graduating with an Associate's degree in General Education.</p>
+      </article>
+      <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+        <h2 class="text-lg font-semibold text-slate-100">University of Illinois Springfield</h2>
+        <p class="mt-3 text-sm leading-relaxed text-slate-300">Aubrey eventually attended the University of Illinois Springfield, working on a Bachelor's degree in Computer Science, but did not complete it.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="border-t border-zinc-800">
+    <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-8 text-center">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-slate-400">
+        <a class="transition hover:text-cyan-400" href="https://github.com/aubreyjcook" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="transition hover:text-cyan-400" href="https://www.linkedin.com/in/aubrey-cook-9b6922152/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="transition hover:text-cyan-400" href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
+      </div>
+      <p class="text-xs italic text-slate-500">“Computers are like old testament gods. Lots of rules, and no mercy.”</p>
+    </div>
+  </footer>
+  <script src="../js/site.js"></script>
 </body>
+</html>

@@ -1,15 +1,19 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="styles/global.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From-scratch template 01</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../../js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../../styles/site.css">
 </head>
-<body>
-<span class="header">
-</span>
-<hr>
-<span class="nav"></span>
-<hr>
-<span class="main"></span>
-<hr>
-<span class="footer">
-</span>
+<body class="flex min-h-screen flex-col bg-zinc-950 font-sans text-slate-100 antialiased">
+  <header class="border-b border-zinc-800 px-4 py-4 text-center">
+    <p class="text-lg font-bold">Header</p>
+  </header>
+  <nav class="border-b border-zinc-800 px-4 py-3 text-center text-sm text-slate-400">Nav</nav>
+  <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12">Main</main>
+  <footer class="border-t border-zinc-800 px-4 py-6 text-center text-sm text-slate-500">Footer</footer>
 </body>
+</html>

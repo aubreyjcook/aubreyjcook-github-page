@@ -1,22 +1,2 @@
-*{
-    text-align: center;
-    background-color: #000000;
-    color: white;
-}
-
-body {
-    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-}
-
-p,h1,h2,h3,h4,h5,h6{
-
-}
-
-/*vanilla util classes*/
-
-.gray-to-white-gradient {
-    background: linear-gradient(to right, gray, white);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
+/* Legacy entry. Primary chrome uses Tailwind + styles/site.css. */
+@import url('./site.css');

@@ -3,6 +3,7 @@ tailwind.config = {
     extend: {
       fontFamily: {
         sans: [
+          'IBM Plex Mono',
           'ui-monospace',
           'Cascadia Code',
           'Source Code Pro',

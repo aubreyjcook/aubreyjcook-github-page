@@ -1,14 +1,363 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+
+:root {
+  --term-bg: #070b07;
+  --term-bg-raised: #0c130c;
+  --term-bg-bar: #101810;
+  --term-fg: #c8ecc2;
+  --term-fg-dim: #8faf86;
+  --term-fg-faint: #6d8c68;
+  --term-green: #5dff6a;
+  --term-amber: #e6c15a;
+  --term-border: #1c3a20;
+  --term-font: "IBM Plex Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+}
+
 html {
   scroll-behavior: smooth;
+  background: var(--term-bg);
+  color-scheme: dark;
 }
 
 ::selection {
-  background: #22d3ee;
-  color: #09090b;
+  background: var(--term-green);
+  color: #071207;
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #22d3ee;
+  outline: 2px solid var(--term-green);
   outline-offset: 3px;
+}
+
+body.bg-zinc-950 {
+  background-color: var(--term-bg);
+  background-image: radial-gradient(ellipse at 50% -10%, #142214 0%, var(--term-bg) 52%);
+  background-attachment: fixed;
+  color: var(--term-fg);
+  font-family: var(--term-font);
+  font-variant-ligatures: none;
+}
+
+body.bg-zinc-950::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.16) 3px
+  );
+}
+
+body.bg-zinc-950 .text-slate-100,
+body.bg-zinc-950 .text-slate-200 {
+  color: var(--term-fg);
+}
+
+body.bg-zinc-950 .text-slate-300 {
+  color: #b5d4af;
+}
+
+body.bg-zinc-950 .text-slate-400 {
+  color: var(--term-fg-dim);
+}
+
+body.bg-zinc-950 .text-slate-500 {
+  color: var(--term-fg-faint);
+}
+
+body.bg-zinc-950 .text-cyan-400,
+body.bg-zinc-950 .text-cyan-400\/90,
+body.bg-zinc-950 .group:hover .group-hover\:text-cyan-400,
+body.bg-zinc-950 .hover\:text-cyan-400:hover,
+body.bg-zinc-950 .hover\:text-slate-100:hover {
+  color: var(--term-green);
+}
+
+body.bg-zinc-950 .text-cyan-400,
+body.bg-zinc-950 .text-cyan-400\/90 {
+  text-shadow: 0 0 10px rgba(93, 255, 106, 0.22);
+}
+
+body.bg-zinc-950 .bg-zinc-950,
+body.bg-zinc-950 .bg-zinc-950\/85 {
+  background-color: rgba(7, 11, 7, 0.94);
+}
+
+body.bg-zinc-950 .bg-zinc-900,
+body.bg-zinc-950 .bg-zinc-900\/40,
+body.bg-zinc-950 .bg-zinc-900\/50,
+body.bg-zinc-950 .hover\:bg-zinc-900:hover {
+  background-color: var(--term-bg-raised);
+}
+
+body.bg-zinc-950 .border-zinc-800,
+body.bg-zinc-950 .divide-zinc-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--term-border);
+}
+
+body.bg-zinc-950 .border-zinc-700 {
+  border-color: #2c4d30;
+}
+
+body.bg-zinc-950 .hover\:border-cyan-500\/40:hover {
+  border-color: var(--term-green);
+}
+
+body.bg-zinc-950 .rounded,
+body.bg-zinc-950 .rounded-md,
+body.bg-zinc-950 .rounded-xl,
+body.bg-zinc-950 .rounded-full {
+  border-radius: 0;
+}
+
+body.bg-zinc-950 .font-bold,
+body.bg-zinc-950 .font-semibold {
+  font-weight: 500;
+}
+
+body.bg-zinc-950 .uppercase {
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+}
+
+body.bg-zinc-950 > header {
+  background-color: var(--term-bg-bar);
+  border-bottom-color: var(--term-border);
+  box-shadow: 0 1px 0 rgba(93, 255, 106, 0.06);
+  backdrop-filter: none;
+}
+
+body.bg-zinc-950 > header::before {
+  content: "aubrey@local: ~";
+  display: block;
+  padding: 0.45rem 1rem 0.45rem 4.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--term-fg-dim);
+  background:
+    radial-gradient(circle at 16px 50%, #ff5f56 5px, transparent 5.5px),
+    radial-gradient(circle at 34px 50%, #ffbd2e 5px, transparent 5.5px),
+    radial-gradient(circle at 52px 50%, #27c93f 5px, transparent 5.5px),
+    linear-gradient(var(--term-bg-bar), var(--term-bg-bar));
+  border-bottom: 1px solid var(--term-border);
+}
+
+body.bg-zinc-950 > header a.min-w-0 > span:first-child {
+  color: var(--term-green);
+  font-weight: 500;
+  text-shadow: 0 0 10px rgba(93, 255, 106, 0.2);
+}
+
+body.bg-zinc-950 > header a.min-w-0 > span:first-child::before {
+  content: "~/ ";
+  color: var(--term-amber);
+  font-weight: 400;
+  text-shadow: none;
+}
+
+body.bg-zinc-950 > header a.min-w-0 > span:last-child::before {
+  content: "# ";
+  color: var(--term-fg-faint);
+}
+
+body.bg-zinc-950 > header nav[aria-label="Primary"]::before {
+  content: "$";
+  color: var(--term-amber);
+}
+
+body.bg-zinc-950 #mobile-nav a:first-child::before {
+  content: "$ ";
+  color: var(--term-amber);
+  text-shadow: none;
+}
+
+body.bg-zinc-950 > header nav a {
+  text-transform: lowercase;
+  text-decoration: none;
+}
+
+body.bg-zinc-950 > header nav a[aria-current="page"] {
+  color: var(--term-green);
+  text-shadow: 0 0 10px rgba(93, 255, 106, 0.28);
+}
+
+body.bg-zinc-950 > header nav a[aria-current="page"]::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.95em;
+  margin-left: 0.28em;
+  background: var(--term-green);
+  vertical-align: text-bottom;
+  box-shadow: 0 0 8px rgba(93, 255, 106, 0.65);
+  animation: term-blink 1.05s steps(1) infinite;
+}
+
+body.bg-zinc-950 #nav-toggle {
+  border-radius: 0;
+  border-color: var(--term-border);
+  color: var(--term-green);
+  background: transparent;
+}
+
+body.bg-zinc-950 a[href="#main-content"]:focus {
+  border-radius: 0;
+  background: var(--term-green);
+  color: #071207;
+}
+
+body.bg-zinc-950 main h1::before {
+  content: "$ ";
+  color: var(--term-amber);
+  font-weight: 400;
+  text-shadow: none;
+}
+
+body.bg-zinc-950 main h2 {
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+}
+
+body.bg-zinc-950 main h2::before {
+  content: "// ";
+  color: var(--term-fg-faint);
+  font-weight: 400;
+  text-shadow: none;
+}
+
+body.bg-zinc-950 main > p.text-cyan-400\/90::before {
+  content: "cwd  ";
+  color: var(--term-amber);
+  text-shadow: none;
+}
+
+body.bg-zinc-950 .rounded-xl,
+body.bg-zinc-950 article.group {
+  background-color: var(--term-bg-raised);
+  box-shadow: inset 0 1px 0 rgba(93, 255, 106, 0.4);
+}
+
+body.bg-zinc-950 .rounded-full {
+  border: 0;
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  color: var(--term-fg);
+}
+
+body.bg-zinc-950 .rounded-full::before,
+body.bg-zinc-950 .rounded-full::after {
+  color: var(--term-fg-faint);
+}
+
+body.bg-zinc-950 .rounded-full::before {
+  content: "[";
+  margin-right: 0.4rem;
+}
+
+body.bg-zinc-950 .rounded-full::after {
+  content: "]";
+  margin-left: 0.4rem;
+}
+
+body.bg-zinc-950 a.bg-cyan-400 {
+  border: 1px solid var(--term-green);
+  border-radius: 0;
+  background: transparent;
+  color: var(--term-green);
+  font-weight: 500;
+  box-shadow: 0 0 12px rgba(93, 255, 106, 0.08);
+}
+
+body.bg-zinc-950 a.bg-cyan-400::before {
+  content: "$ ";
+  color: var(--term-amber);
+}
+
+body.bg-zinc-950 a.bg-cyan-400:hover,
+body.bg-zinc-950 a.hover\:bg-cyan-300:hover {
+  background: var(--term-green);
+  color: #071207;
+  text-shadow: none;
+}
+
+body.bg-zinc-950 a.bg-cyan-400:hover::before {
+  color: #071207;
+}
+
+body.bg-zinc-950 ol.border-l {
+  border-color: #3d7a42;
+}
+
+body.bg-zinc-950 ol.border-l > li {
+  position: relative;
+}
+
+body.bg-zinc-950 ol.border-l > li::before {
+  content: "";
+  position: absolute;
+  left: -1.72rem;
+  top: 0.28rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--term-green);
+  box-shadow: 0 0 8px rgba(93, 255, 106, 0.7);
+}
+
+body.bg-zinc-950 article img {
+  border-bottom: 1px solid var(--term-border);
+}
+
+body.bg-zinc-950 blockquote {
+  font-style: normal;
+  border-left: 2px solid var(--term-green);
+}
+
+body.bg-zinc-950 blockquote::before {
+  content: "# ";
+  color: var(--term-fg-faint);
+}
+
+body.bg-zinc-950 > footer {
+  border-top-color: var(--term-border);
+  background: #080d08;
+}
+
+body.bg-zinc-950 > footer p {
+  font-style: normal;
+}
+
+body.bg-zinc-950 > footer p::before {
+  content: "// ";
+  color: var(--term-fg-faint);
+}
+
+@keyframes term-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body.bg-zinc-950::after {
+    display: none;
+  }
+
+  body.bg-zinc-950 > header nav a[aria-current="page"]::after {
+    animation: none;
+  }
 }

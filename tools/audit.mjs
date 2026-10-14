@@ -163,9 +163,10 @@ for (const p of MODERN) {
     addEventListener() {},
   };
   /* Simulate the real deployed URL. relative() yields backslashes on Windows,
-     so normalise before stripping the pages/ prefix. */
+     so normalise. The site root holds index.html; everything under pages/ keeps
+     its pages/ segment (templates live at pages/templates/<variant>/). */
   const relUrl = rel.split('\\').join('/');
-  const urlPath = relUrl === 'index.html' ? '/index.html' : '/' + relUrl.replace(/^pages\//, '');
+  const urlPath = relUrl === 'index.html' ? '/index.html' : '/' + relUrl;
   const sb = { document: doc, console, setTimeout: () => 0, clearTimeout() {}, setInterval: () => 0, clearInterval() {} };
   sb.window = { location: { pathname: urlPath }, matchMedia: () => ({ matches: false }), document: doc, setTimeout: sb.setTimeout, setInterval: sb.setInterval };
   try {

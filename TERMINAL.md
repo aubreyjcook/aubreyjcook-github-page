@@ -23,15 +23,18 @@ the site does not depend on them:
 | Script | Purpose |
 | --- | --- |
 | `tools/build-student-work.mjs` | Generates `pages/student-work.html` from `tools/student-work.template.html` plus the course data at the top of the script. |
-| `tools/verify-page.mjs` | Checks the generated page: tag balance, entities, placeholders, local targets. |
+| `tools/check-html.mjs` | Generic page checker: tag balance, unique ids, entity validity, local targets, in-page anchors, landmarks. Takes file arguments; defaults to the generated page. |
 | `tools/verify-terminal.mjs` | Runs the real `js/site.js` against a DOM stub; asserts the status path for every real URL shape, the reduced-motion path, and the typed heading. |
 | `tools/audit.mjs` | Whole-site sweep: broken internal links grouped by cause, duplicate ids, and chrome injection on every modern page. |
+| `tools/asset-matrix.mjs` | Table of which pages load `site.css`, the Tailwind config, and `site.js` — the quickest way to spot a page whose relative paths are wrong. |
 
 ```sh
 # from the deploy directory
-node tools/build-student-work.mjs   # regenerate the student-work page
-node tools/verify-terminal.mjs      # terminal behaviour
-node tools/audit.mjs                # whole-site link + chrome report
+node tools/build-student-work.mjs         # regenerate the student-work page
+node tools/check-html.mjs pages/quotes.html
+node tools/verify-terminal.mjs            # terminal behaviour + status paths
+node tools/audit.mjs                      # whole-site link + chrome report
+node tools/asset-matrix.mjs               # asset loading per page
 ```
 
 ---

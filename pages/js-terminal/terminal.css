@@ -1,0 +1,221 @@
+/* ===========================================================================
+   terminal.css — the sandbox terminal window.
+
+   Layered on top of styles/site.css, so it inherits the site's cool palette from
+   the --term-* custom properties. Nothing here introduces a new colour; if you
+   re-tint :root, this follows.
+
+   Class names are namespaced .sandbox* so they cannot collide with the global
+   utility bridge in site.css.
+   =========================================================================== */
+
+.sandbox {
+  margin-top: 2rem;
+  border: 1px solid var(--term-border);
+  background: var(--term-bg-sunken);
+  box-shadow: inset 0 0 0 1px rgba(138, 216, 255, 0.06), 0 24px 60px -40px rgba(0, 0, 0, 0.9);
+  font-family: var(--term-font);
+}
+
+/* --- title bar ------------------------------------------------------------- */
+
+.sandbox__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--term-bg-bar);
+  border-bottom: 1px solid var(--term-border);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--term-fg-dim);
+}
+
+.sandbox__chips {
+  display: inline-flex;
+  gap: 0.35rem;
+  flex: none;
+}
+
+.sandbox__chips i {
+  width: 6px;
+  height: 6px;
+  background: var(--term-accent-deep);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(138, 216, 255, 0.35);
+}
+
+.sandbox__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sandbox__state {
+  flex: none;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--term-border-lit);
+  color: var(--term-accent);
+  background: rgba(138, 216, 255, 0.06);
+}
+
+.sandbox__state[data-state="RUNNING"] {
+  color: var(--term-ink);
+  background: var(--term-accent);
+  border-color: var(--term-accent);
+}
+
+/* --- scrollback ------------------------------------------------------------ */
+
+.sandbox__out {
+  height: clamp(18rem, 52vh, 34rem);
+  overflow-y: auto;
+  padding: 0.85rem 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--term-fg-body);
+  outline: none;
+  scrollbar-color: var(--term-cmd) var(--term-bg-sunken);
+}
+
+.sandbox__out::-webkit-scrollbar {
+  width: 10px;
+}
+
+.sandbox__out::-webkit-scrollbar-track {
+  background: var(--term-bg-sunken);
+}
+
+.sandbox__out::-webkit-scrollbar-thumb {
+  background: var(--term-cmd);
+  border: 2px solid var(--term-bg-sunken);
+}
+
+.sandbox__out:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--term-border-lit);
+}
+
+/* --- lines ----------------------------------------------------------------- */
+
+.sandbox__line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 1.5em;
+}
+
+.sandbox__line.is-echo {
+  color: var(--term-fg);
+}
+
+.sandbox__line.is-echo::before {
+  content: "> ";
+  color: var(--term-cmd);
+}
+
+.sandbox__line.is-ok {
+  color: var(--term-accent);
+}
+
+.sandbox__line.is-warn {
+  color: var(--term-accent-soft);
+}
+
+.sandbox__line.is-error {
+  color: var(--term-fg);
+  background: var(--term-accent-wash);
+  box-shadow: inset 2px 0 0 var(--term-accent);
+  padding-left: 0.5rem;
+}
+
+.sandbox__line.is-dim {
+  color: var(--term-fg-faint);
+}
+
+.sandbox__line.is-source {
+  color: var(--term-cmd);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* --- input line ------------------------------------------------------------ */
+
+.sandbox__input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  border-top: 1px solid var(--term-border);
+  background: var(--term-bg-bar);
+}
+
+.sandbox__prompt {
+  flex: none;
+  color: var(--term-cmd);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.sandbox__input input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--term-font);
+  font-size: 0.85rem;
+  color: var(--term-fg);
+  caret-color: var(--term-accent);
+  padding: 0;
+}
+
+.sandbox__input input::placeholder {
+  color: var(--term-fg-faint);
+}
+
+.sandbox__input input:disabled {
+  color: var(--term-fg-faint);
+}
+
+/* a self-advancing cursor block, matching the site's blinking caret */
+.sandbox__caret {
+  flex: none;
+  width: 0.5em;
+  height: 1em;
+  background: var(--term-accent);
+  box-shadow: 0 0 8px var(--term-glow-strong);
+  animation: term-blink 1.05s steps(1) infinite;
+}
+
+.sandbox.is-asking .sandbox__prompt {
+  color: var(--term-accent-soft);
+}
+
+/* --- narrow screens -------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .sandbox__out {
+    font-size: 0.72rem;
+    padding: 0.7rem 0.65rem;
+  }
+
+  .sandbox__input input,
+  .sandbox__prompt {
+    font-size: 0.78rem;
+  }
+
+  .sandbox__title {
+    font-size: 0.6rem;
+  }
+}
+
+/* --- reduced motion -------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .sandbox__caret {
+    animation: none;
+  }
+}

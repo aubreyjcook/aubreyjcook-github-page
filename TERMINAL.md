@@ -25,6 +25,9 @@ the site does not depend on them:
 | `tools/build-student-work.mjs` | Generates `pages/student-work.html` from `tools/student-work.template.html` plus the course data at the top of the script. |
 | `tools/check-html.mjs` | Generic page checker: tag balance, unique ids, entity validity, local targets, in-page anchors, landmarks. Takes file arguments; defaults to the generated page. |
 | `tools/verify-terminal.mjs` | Runs the real `js/site.js` against a DOM stub; asserts the status path for every real URL shape, the reduced-motion path, and the typed heading. |
+| `tools/verify-sandbox-terminal.mjs` | Drives the sandbox terminal widget: commands, output styles, history, interactive prompts, busy guards. |
+| `tools/verify-sandbox-worker.mjs` | Import rewriting, the module-syntax guard, and that the shipped demo files are valid classic scripts. |
+| `tools/verify-demos.mjs` | Drives the real `Sandbox.run` and executes both shipped demos — the strongest of the three. |
 | `tools/audit.mjs` | Whole-site sweep: broken internal links grouped by cause, duplicate ids, and chrome injection on every modern page. |
 | `tools/asset-matrix.mjs` | Table of which pages load `site.css`, the Tailwind config, and `site.js` — the quickest way to spot a page whose relative paths are wrong. |
 
@@ -32,7 +35,10 @@ the site does not depend on them:
 # from the deploy directory
 node tools/build-student-work.mjs         # regenerate the student-work page
 node tools/check-html.mjs pages/quotes.html
-node tools/verify-terminal.mjs            # terminal behaviour + status paths
+node tools/verify-terminal.mjs            # status strip behaviour + status paths
+node tools/verify-sandbox-terminal.mjs    # sandbox terminal widget
+node tools/verify-sandbox-worker.mjs      # worker bootstrap + import rewriting
+node tools/verify-demos.mjs               # run the shipped demos for real
 node tools/audit.mjs                      # whole-site link + chrome report
 node tools/asset-matrix.mjs               # asset loading per page
 ```
@@ -41,10 +47,23 @@ node tools/asset-matrix.mjs               # asset loading per page
 
 ## 1. What the terminal actually is
 
-It is **one SVG-free, dependency-free DOM widget**, not a real shell. It is a
-fixed strip pinned to the bottom of the viewport that looks and behaves like a
-single-line terminal status bar, plus a tiny command interpreter that answers
-from a hard-coded table.
+There are **two** terminals on this site, and they do different jobs:
+
+| | Status strip | Sandbox terminal |
+| --- | --- | --- |
+| Where | Every page, fixed to the bottom | `pages/js-terminal/js-sandbox-terminal.html` only |
+| Source | `js/site.js` + `styles/site.css` | `pages/js-terminal/*` |
+| Purpose | Wayfinding and personality: page path, clock, a few flavoured commands | Running demo code |
+| Commands | `help whoami date dir pwd ver clear exit` | `help demos run source clear reset history about` |
+
+They share the palette and the typeface but no code, deliberately. The strip is
+one line and always present; the sandbox is a full scrollback and only exists on
+one page. Section 7 covers the sandbox.
+
+The status strip itself is **one SVG-free, dependency-free DOM widget**, not a
+real shell. It is a fixed strip pinned to the bottom of the viewport that looks
+and behaves like a single-line terminal status bar, plus a tiny command
+interpreter that answers from a hard-coded table.
 
 ```
 +-- the strip --------------------------------------------------------------+
@@ -746,4 +765,231 @@ query, which hides the readout cluster on narrow screens.
 | Special glyphs render as boxes | A font in `--term-font` is missing them, and Consolas was removed from the stack. |
 | Terminal styling missing on a new page | Its `<body>` lacks `bg-zinc-950`, or it loads `global.css`. |
 | Colours look half-Tailwind | A new utility class in markup has no rule in the bridge section. |
+| Sandbox terminal prints nothing | An exception during `terminal.js` startup. Check the console; `tools/verify-sandbox-terminal.mjs` reproduces startup without a browser. |
+| Sandbox demo says "unexpected token 'export'" | The demo uses `export` syntax. See §7.4 — use `module.exports`. |
+| Sandbox worker never returns | The demo threw before posting. The worker is replaced automatically on the next `run`; `reset` forces it. |
 | Changes do not appear after deploy | GitHub Pages and browsers cache `site.css` / `site.js` aggressively. Bump `?v=2` on the `<link>` and `<script>` tags, or hard-refresh. |
+
+---
+
+## 7. The sandbox terminal
+
+The status strip is flavour. The sandbox terminal is the one that **runs code**.
+It lives entirely under `pages/js-terminal/`:
+
+| File | Role |
+| --- | --- |
+| `js-sandbox-terminal.html` | Page shell: site chrome plus the terminal window. |
+| `terminal.css` | Terminal styling. Consumes the `--term-*` tokens; introduces no new colour. |
+| `terminal.js` | The widget: scrollback, input, history, command dispatch. |
+| `worker-sandbox.js` | Builds the isolated worker and ships a demo file into it. |
+| `demos/_registry.js` | The `Demos.define` registry. Load first. |
+| `demos/collatz.js` | A plain-JavaScript demo. |
+| `demos/type-basics.js` | A compiled TypeScript demo. |
+| `demos/src/type-basics.ts` | Its TypeScript source. Not loaded by the browser. |
+
+### 7.1 Why a worker
+
+Demos are evaluated in a **Web Worker**, not on the page:
+
+- a runaway `while (true)` burns the worker's thread, so the page stays responsive
+- the code has no DOM, no cookies, and no access to the page's variables
+- `import()` works inside a module worker, so a demo can be split across files
+
+The worker is built from a Blob URL, so there is no second file to keep in sync.
+It is created lazily on the first run and torn down and replaced after any
+worker-level error, which means one bad demo cannot poison the session.
+
+### 7.1a What actually travels to the worker
+
+This is the part that is easy to get wrong, and it cost real debugging time.
+
+`Function.prototype.toString()` on a function returns **only that function's
+declaration** — not the surrounding file. So the sandbox cannot pick a demo out
+of the page by grabbing one function: the `Demos.define(...)` call that names and
+registers it lives *outside* the function body and would be left behind.
+
+The sandbox therefore ships the **demo file's own text**, read at load time via
+`document.currentScript`, and re-evaluates it in the worker. That is exactly what
+the browser does when the page loads the file, which is why a demo file has to be
+valid in both places:
+
+- as a classic `<script>` on the page
+- as the body of an async function in the worker
+
+Consequences worth knowing:
+
+| In a demo file | Page | Worker |
+| --- | --- | --- |
+| `export` / `import.meta` | no | no — the guard rejects it with advice |
+| `return` at the top level | **SyntaxError** | fine, but pointless |
+| `Demos.define(...)` at top level | registers | registers, into the worker's stub |
+| Reaching a helper from another file | fine | **not available** — no shared scope |
+
+A demo's *function body* must still be self-contained. Anything shared travels
+through `args`.
+
+### 7.2 The demo API
+
+Everything a demo needs arrives as parameters:
+
+```js
+async function myDemo(args) {
+  await demo.print('a line');            // ordinary output
+  await demo.printSource('x = 1');       // preformatted, dimmed
+  const name = await demo.ask('name?');  // resolves to a line of input
+  await demo.sleep(500);                 // wait
+  await demo.clear();                    // wipe the scrollback
+  console.log('goes to the terminal');   // console is forwarded
+  return 'shown when the demo finishes';
+}
+
+Demos.define('my-demo', {
+  title: 'My demo',
+  blurb: 'One line describing it.',
+  lang: 'javascript',
+}, myDemo);
+```
+
+| Injected | What it is |
+| --- | --- |
+| `demo.print(v)` | Print a value. Objects are `JSON.stringify`-ed. |
+| `demo.printSource(s)` | Print preformatted text, dimmed, newlines preserved. |
+| `demo.ask(q)` | Print a question, wait for a line of input, resolve to it. |
+| `demo.sleep(ms)` | Wait. |
+| `demo.clear()` | Clear the scrollback. |
+| `demo.now()` / `demo.random()` | Convenience wrappers. |
+| `console.log/warn/error` | Forwarded to the terminal with the matching style. |
+| `args` | `{ _: ['first', 'second'], name: 'demo-name' }` — everything after the demo name. |
+
+Every `demo.*` method returns a promise, so `await` always works, and a plain
+call still behaves. Returning a value prints it; throwing is caught and shown
+with the elapsed time.
+
+### 7.3 Adding a demo
+
+One demo per file, in `demos/`. Copy `demos/collatz.js`, which is the whole
+pattern: a self-contained async function, then a `Demos.define` call at the
+bottom naming it.
+
+1. Write `demos/my-demo.js`:
+
+```js
+async function myDemo(args) {
+  await demo.print('hello from ' + (args._[0] || 'nowhere'));
+  return 'done';
+}
+
+Demos.define('my-demo', {
+  title: 'My demo',
+  blurb: 'One line describing it.',
+  lang: 'javascript',
+}, myDemo);
+```
+
+2. Add a script tag to `js-sandbox-terminal.html`, **after** `_registry.js` and
+   **before** `terminal.js`:
+
+```html
+<script src="demos/_registry.js"></script>
+<script src="demos/collatz.js"></script>
+<script src="demos/my-demo.js"></script>
+<script src="demos/type-basics.js"></script>
+<script src="terminal.js"></script>
+```
+
+3. `run my-demo`, or just `my-demo`. `demos` lists it, and `source my-demo` shows
+   the serialised form the worker evaluates — useful when one misbehaves.
+
+The name in `Demos.define` is the contract: the worker resolves the demo by it.
+Registering under a different name than the file is fine, but the command you
+type is the registered one.
+
+**Compiled TypeScript.** Author `demos/src/my-demo.ts` with a default export,
+compile it into `demos/my-demo.js`, then wrap the result in a `Demos.define`
+call as above. No compiler is downloaded at run time — the build output ships in
+the repository, which is why the page carries no multi-megabyte dependency.
+
+```sh
+# in pages/js-terminal/, using npx (or a local install of typescript)
+npx tsc demos/src/my-demo.ts \
+  --target es2020 --module es2020 \
+  --outDir /tmp/ts-out --removeComments false
+# then paste /tmp/ts-out/my-demo.js into the Demos.define wrapper
+```
+
+TypeScript emits `export default …`, which cannot cross into the worker. The
+sandbox detects it and says so explicitly rather than letting the worker die on
+`Unexpected token` — see §7.4. `type-basics` was produced this way: its `.ts`
+source sits beside the compiled `.js`, and the compiled file carries a
+"BUILD OUTPUT" header.
+
+### 7.4 What cannot cross into the worker
+
+The demo file is re-evaluated in the worker, so its *top-level* code is fine —
+but its function body has no shared scope, and module syntax does not survive:
+
+| Written in a demo file | Works? | Use instead |
+| --- | --- | --- |
+| `export default function f() {}` | No | `Demos.define('name', meta, f)` |
+| `import.meta.url` | No | pass the value through `args` |
+| `return` at the top level | No — and it is a SyntaxError on the page too | nothing; let `Demos.define` do the work |
+| `import x from "./m.js"` | Yes — rewritten to `await runner.import(...)` | — |
+| `import { a, b as c } from …` | Yes — rewritten | — |
+| `import * as ns from …` | Yes — rewritten | — |
+| `import "./side-effect.js"` | Yes — rewritten | — |
+| `Demos.define(...)` at top level | Yes — this is the registration mechanism | — |
+| Closure over another file's scope, inside the demo function | No | pass it through `args` |
+
+`tools/verify-sandbox-worker.mjs` asserts the rewriting and guard rows;
+`tools/verify-demos.mjs` asserts the rest against the shipped demos.
+
+### 7.5 Commands
+
+| Command | Does |
+| --- | --- |
+| `help`, `?` | Command list |
+| `demos`, `ls` | Registered demos, with language and source path |
+| `run <name> [args]` | Run a demo |
+| `<name> [args]` | Shorthand for `run` |
+| `source <name>` | The demo function exactly as the worker receives it |
+| `clear`, `cls` | Clear the scrollback |
+| `reset` | Terminate the worker; a fresh one starts on the next run |
+| `history` | Recent commands |
+| `about` | What the page is |
+
+Keyboard: up/down walk history, `Ctrl`+`L` clears, `Esc` clears the line or
+interrupts a running demo.
+
+### 7.6 Verifying it
+
+The worker needs a real browser (`Worker` and `blob:` URLs), so the worker itself
+cannot execute in this sandbox. Everything around it is tested:
+
+```sh
+node tools/verify-sandbox-terminal.mjs   # the widget: commands, styles, history, ask, busy guards
+node tools/verify-sandbox-worker.mjs     # import rewriting, module guard, bootstrap shape
+node tools/verify-demos.mjs              # runs BOTH shipped demos through the real pipeline
+```
+
+`verify-demos.mjs` is the strongest of the three: it drives the actual
+`Sandbox.run`, parses the source the sandbox generates, rebuilds the worker's
+scope, and executes the shipped demos for real — checking `collatz(6)` reaches 1
+in 8 steps, `collatz(27)` peaks at 9232, and the compiled TypeScript demo returns
+a score. It is not a browser; it is a rehearsal of the same contract.
+
+These caught three genuine bugs and one wrong design:
+
+1. A mock emitting `clear` between other output lines wiped the very lines the
+   assertion was reading — the *harness* was wrong, the widget was right.
+2. `export` syntax cannot cross into the worker, which is now an explicit error
+   with advice instead of `Unexpected token`.
+3. The bootstrap never injected `module`, so a demo's `module.exports` assignment
+   silently landed on the worker global.
+4. **The original design could not work at all.** Picking a demo out of the page
+   with `Function.prototype.toString()` yields only the function declaration, so
+   the `Demos.define` call registering it was left behind and no demo could ever
+   resolve. Hence shipping the demo file's text — §7.1a.
+
+**Still unexecuted: the real `Worker`.** Open the page and run `collatz` to
+confirm it end to end in a browser.

@@ -13,6 +13,7 @@ required to deploy — push the branch and Pages serves it.
 | `pages/` | All other pages: about, portfolio, experience, education, resume, quotes, favorites. |
 | `pages/portfolio/` | Portfolio sub-section, including the 18 hosted PRG 147 exercises. |
 | `pages/templates/` | Starting points for new pages. `index.html` lists them; linked from the portfolio. |
+| `pages/js-terminal/` | The sandbox terminal: runs JavaScript and compiled TypeScript demos in the page. |
 | `styles/site.css` | Every style on the site, plus the colour tokens. |
 | `js/site.js` | Terminal chrome: boot sequence, status strip, small command line. |
 | `js/tailwind-config.js` | Font stacks. |
@@ -50,11 +51,14 @@ before changing anything in `js/site.js` or `styles/site.css`.
 Requires Node only for the optional tools.
 
 ```sh
-node tools/build-student-work.mjs   # regenerate pages/student-work.html
-node tools/check-html.mjs [files]   # tag balance, ids, entities, local targets
-node tools/verify-terminal.mjs      # terminal behaviour + status paths
-node tools/audit.mjs                # whole-site broken-link and chrome report
-node tools/asset-matrix.mjs         # which pages load which shared assets
+node tools/build-student-work.mjs       # regenerate pages/student-work.html
+node tools/check-html.mjs [files]       # tag balance, ids, entities, local targets
+node tools/verify-terminal.mjs          # status strip behaviour + status paths
+node tools/verify-sandbox-terminal.mjs  # the sandbox terminal widget, commands, input
+node tools/verify-sandbox-worker.mjs    # import rewriting, module guard, worker bootstrap
+node tools/verify-demos.mjs             # runs both shipped demos through the real pipeline
+node tools/audit.mjs                    # whole-site broken-link and chrome report
+node tools/asset-matrix.mjs             # which pages load which shared assets
 ```
 
 `pages/student-work.html` is generated from `tools/student-work.template.html`

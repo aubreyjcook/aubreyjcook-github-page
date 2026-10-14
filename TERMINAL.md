@@ -13,9 +13,26 @@ page on the site:
 | `styles/site.css` | All terminal styling and the colour tokens. |
 | `js/tailwind-config.js` | Font stacks only. |
 
-There is no build step and no dependencies. The pages load Tailwind from its CDN,
-then `styles/site.css` deliberately *overrides* Tailwind's utility classes so the
-whole site reads as one vintage machine.
+There is no build step for the site itself and no dependencies. The pages load
+Tailwind from its CDN, then `styles/site.css` deliberately *overrides* Tailwind's
+utility classes so the whole site reads as one vintage machine.
+
+`tools/` holds optional Node scripts — they are never shipped to the browser and
+the site does not depend on them:
+
+| Script | Purpose |
+| --- | --- |
+| `tools/build-student-work.mjs` | Generates `pages/student-work.html` from `tools/student-work.template.html` plus the course data at the top of the script. |
+| `tools/verify-page.mjs` | Checks the generated page: tag balance, entities, placeholders, local targets. |
+| `tools/verify-terminal.mjs` | Runs the real `js/site.js` against a DOM stub; asserts the status path for every real URL shape, the reduced-motion path, and the typed heading. |
+| `tools/audit.mjs` | Whole-site sweep: broken internal links grouped by cause, duplicate ids, and chrome injection on every modern page. |
+
+```sh
+# from the deploy directory
+node tools/build-student-work.mjs   # regenerate the student-work page
+node tools/verify-terminal.mjs      # terminal behaviour
+node tools/audit.mjs                # whole-site link + chrome report
+```
 
 ---
 
@@ -180,26 +197,43 @@ window.setInterval(refreshStatus, 1000);
 `640K OK` and the `DSK` LED are decorative. There is no timer to clear on
 `pagehide` because the strip only ever exists as long as the page does.
 
-The **status text is generated, not hard-coded** — it derives a fake DOS path
-from the URL, so every page reports its own directory:
+The **status text is generated, not hard-coded** — it derives a DOS-style path
+from the URL:
 
 ```js
-function slugFromPath() {
-  var path = window.location.pathname;
-  var tail = path.substring(path.lastIndexOf('/') + 1);
-  return tail.replace(/\.html?$/i, '') || 'index';
-}
-
 function machineLine() {
-  var page = slugFromPath();
-  return page === 'index' ? 'C:\\AUBREY\\HOME' : 'C:\\AUBREY\\HOME\\' + page.toUpperCase();
+  var parts = window.location.pathname.split('/').filter(Boolean);
+  var file = parts.length ? parts[parts.length - 1] : '';
+  var dirs = parts.slice(0, -1);
+  var at = dirs.indexOf('pages');
+  if (at !== -1) dirs = dirs.slice(at + 1);   // drop the site-layout segment
+
+  var readable = file.replace(/\.html?$/i, '');
+  if (readable && readable !== 'index') dirs = dirs.concat([readable]);
+
+  var line = 'C:\\AUBREY\\HOME';
+  for (var i = 0; i < dirs.length; i++) line += '\\' + dirs[i].toUpperCase();
+  return line;
 }
 ```
 
-So `pages/quotes.html` shows `C:\AUBREY\HOME\QUOTES`. Note this reads
-`location.pathname`, so under a local `file://` open it still works, and on the
-live site the GitHub Pages subpath is included in `pathname` but ignored because
-only the last segment is used.
+Directory indexes collapse to their folder and named pages append the filename,
+so the readout stays short whatever the depth:
+
+| URL | Status path |
+| --- | --- |
+| `/index.html` | `C:\AUBREY\HOME` |
+| `/pages/about.html` | `C:\AUBREY\HOME\ABOUT` |
+| `/pages/portfolio.html` | `C:\AUBREY\HOME\PORTFOLIO` |
+| `/pages/portfolio/portfolio.html` | `C:\AUBREY\HOME\PORTFOLIO\PORTFOLIO` |
+| `/pages/portfolio/personal/school/school.html` | `C:\AUBREY\HOME\PORTFOLIO\PERSONAL\SCHOOL\SCHOOL` |
+| `/pages/portfolio/personal/school/-prg147-/index.html` | `C:\AUBREY\HOME\PORTFOLIO\PERSONAL\SCHOOL\-PRG147-` |
+
+The `pages` segment is dropped because on GitHub Pages the site root is the repo
+root, where `index.html` is the entry point and `pages/` is a layout folder, not
+part of the address. If you ever move the site so that `pages/` becomes a real
+URL segment, delete the `indexOf('pages')` line and the readout follows. All of
+these cases are asserted in `tools/verify-terminal.mjs`.
 
 ### 2.6 The boot sequence and ASCII wordmark
 
@@ -208,7 +242,15 @@ Both are injected **only into a page that opts in** by containing
 
 ```js
 var bootHost = document.querySelector('[data-boot]');
-if (bootHost) { /* boot lines, banner, typing heading */ }
+if (bootHost) { /* boot lines + banner */ }
+```
+
+The self-typing heading is a **separate block** that only looks for the heading,
+so a page can take the typing effect without also taking the boot sequence:
+
+```js
+var h1 = document.querySelector('#main-content h1');
+if (h1) { /* caret, ghost spacer, type-out */ }
 ```
 
 Each boot line is a `<span>` with an increasing `animation-delay`, so one small

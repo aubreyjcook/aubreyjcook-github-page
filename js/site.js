@@ -36,15 +36,25 @@
     return node;
   }
 
-  function slugFromPath() {
-    var path = window.location.pathname;
-    var tail = path.substring(path.lastIndexOf('/') + 1);
-    return tail.replace(/\.html?$/i, '') || 'index';
-  }
-
+  /* A DOS-style path for the status line.
+     Directory indexes collapse to their folder; named pages append the
+     filename. The site-layout segment ("pages") is dropped so the readout
+     stays short regardless of how deep the page sits in the tree. */
   function machineLine() {
-    var page = slugFromPath();
-    return page === 'index' ? 'C:\\AUBREY\\HOME' : 'C:\\AUBREY\\HOME\\' + page.toUpperCase();
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    var file = parts.length ? parts[parts.length - 1] : '';
+    var dirs = parts.slice(0, -1);
+    var at = dirs.indexOf('pages');
+    if (at !== -1) dirs = dirs.slice(at + 1);
+
+    var readable = file.replace(/\.html?$/i, '');
+    if (readable && readable !== 'index') dirs = dirs.concat([readable]);
+
+    var line = 'C:\\AUBREY\\HOME';
+    for (var i = 0; i < dirs.length; i++) {
+      line += '\\' + dirs[i].toUpperCase();
+    }
+    return line;
   }
 
   /* -----------------------------------------------------------------------
@@ -106,46 +116,51 @@
     banner.appendChild(pre);
     banner.appendChild(caption);
     bootHost.appendChild(banner);
+  }
 
-    /* Type the H1, resize-proof (a hidden ghost copy reserves the layout) */
-    var h1 = document.querySelector('#main-content h1');
+  /* -----------------------------------------------------------------------
+     Self-typing page heading
+     Independent of the boot block above, so a page can have the typing
+     heading without also taking the boot sequence.
+     ----------------------------------------------------------------------- */
 
-    if (h1) {
-      var caret = el('i', 'term-caret');
-      caret.setAttribute('aria-hidden', 'true');
+  var h1 = document.querySelector('#main-content h1');
 
-      if (reduceMotion) {
-        h1.appendChild(caret);
-      } else {
-        var full = h1.textContent.trim();
+  if (h1) {
+    var caret = el('i', 'term-caret');
+    caret.setAttribute('aria-hidden', 'true');
 
-        /* a hidden copy holds the heading's final height so the page does not
-           reflow while the text types itself out */
-        var ghost = h1.cloneNode(true);
-        ghost.setAttribute('aria-hidden', 'true');
-        ghost.style.visibility = 'hidden';
-        ghost.style.position = 'absolute';
-        ghost.style.pointerEvents = 'none';
+    if (reduceMotion) {
+      h1.appendChild(caret);
+    } else {
+      var full = h1.textContent.trim();
 
-        var live = el('span', 'term-type');
-        live.setAttribute('aria-hidden', 'true');
+      /* a hidden copy holds the heading's final height so the page does not
+         reflow while the text types itself out */
+      var ghost = h1.cloneNode(true);
+      ghost.setAttribute('aria-hidden', 'true');
+      ghost.style.visibility = 'hidden';
+      ghost.style.position = 'absolute';
+      ghost.style.pointerEvents = 'none';
 
-        h1.textContent = '';
-        h1.appendChild(live);
-        h1.appendChild(caret);
-        h1.setAttribute('aria-label', full);
-        h1.parentNode.insertBefore(ghost, h1.nextSibling);
+      var live = el('span', 'term-type');
+      live.setAttribute('aria-hidden', 'true');
 
-        var i = 0;
-        var step = function () {
-          i += 1;
-          live.textContent = full.slice(0, i);
-          if (i < full.length) {
-            window.setTimeout(step, 42);
-          }
-        };
-        window.setTimeout(step, 620);
-      }
+      h1.textContent = '';
+      h1.appendChild(live);
+      h1.appendChild(caret);
+      h1.setAttribute('aria-label', full);
+      h1.parentNode.insertBefore(ghost, h1.nextSibling);
+
+      var i = 0;
+      var step = function () {
+        i += 1;
+        live.textContent = full.slice(0, i);
+        if (i < full.length) {
+          window.setTimeout(step, 42);
+        }
+      };
+      window.setTimeout(step, 620);
     }
   }
 

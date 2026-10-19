@@ -109,9 +109,10 @@ let askResolver = null;
 const Sandbox = {
   create() {
     return {
-      run(factory, args, onOut) {
+      run(factory, args, onOut, demoName, baseUrl) {
         calls.run += 1;
         calls.lastArgs = args;
+        calls.lastBase = baseUrl;
         calls.lastFactoryName = factory && factory.name;
         /* clear first, so the lines emitted after it are observable */
         onOut('clear', []);
@@ -136,6 +137,7 @@ const DEMOS = {
   },
   beta: {
     name: 'beta', title: 'Beta demo', blurb: '', lang: 'typescript', source: 'demos/src/beta.ts',
+    baseUrl: 'https://example.com/demos/beta.js',
     run: function beta() { return 'b'; },
   },
 };
@@ -146,7 +148,32 @@ const Demos = {
 
 /* --- run terminal.js ----------------------------------------------------- */
 
-const win = { Sandbox, Demos };
+const linkCalls = [];
+let linked = null;
+const SandboxLink = {
+  connect(target) {
+    linkCalls.push(target);
+    linked = {
+      label: 'demo/sandbox@main',
+      description: 'external demos',
+      demos: ['remote-demo'],
+      problems: ['one file skipped'],
+      manifestUrl: 'https://cdn.jsdelivr.net/gh/demo/sandbox@main/sandbox.json',
+      cancelled: false,
+    };
+    return Promise.resolve(linked);
+  },
+  cancel() { linkCalls.push('cancel'); },
+  disconnect() {
+    const label = linked ? linked.label : '';
+    const removed = linked ? linked.demos.length : 0;
+    linked = null;
+    return { removed, label };
+  },
+  current() { return linked; },
+};
+
+const win = { Sandbox, Demos, SandboxLink };
 const sb = { window: win, document, console, Promise, setTimeout, Math, Date, JSON, String, Number, Object, Array, Error, RegExp };
 sb.self = sb;
 sb.globalThis = sb;
@@ -220,6 +247,7 @@ calls.run = 0;
 submit('beta');
 check('sandbox.run called', calls.run === 1, String(calls.run));
 check('ran beta', calls.lastArgs && calls.lastArgs.name === 'beta');
+check('base url forwarded', calls.lastBase === 'https://example.com/demos/beta.js', String(calls.lastBase));
 pendingResolve({ ok: false, message: 'boom' });
 await new Promise((r) => setImmediate(r));
 await new Promise((r) => setImmediate(r));
@@ -273,6 +301,23 @@ const aborts = calls.abort;
 submit('reset');
 check('abort called', calls.abort > aborts);
 check('confirms restart', /fresh one starts/.test(allText()));
+
+console.log('\n=== connect ===');
+submit('connect');
+check('connect usage', /usage: connect/.test(allText()));
+submit('connect acme/sandbox');
+await new Promise((r) => setImmediate(r));
+await new Promise((r) => setImmediate(r));
+check('sandbox link called', linkCalls[0] === 'acme/sandbox', JSON.stringify(linkCalls));
+check('reports the link', /linked demo\/sandbox@main — 1 demo/.test(allText()));
+check('surfaces a skipped file', /one file skipped/.test(allText()));
+check('idle after connect', stateEl.textContent === 'IDLE', stateEl.textContent);
+submit('link');
+check('link shows the manifest', /cdn\.jsdelivr\.net\/gh\/demo\/sandbox@main\/sandbox\.json/.test(allText()));
+submit('disconnect');
+check('disconnect confirms', /unlinked demo\/sandbox@main/.test(allText()));
+submit('link');
+check('link reports built-ins after disconnect', /built-in demos only/.test(allText()));
 
 console.log('\n=== ctrl+l clears ===');
 submit('about');

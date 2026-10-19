@@ -42,7 +42,7 @@
   <main id="main-content" class="mx-auto w-full max-w-5xl flex-1 px-4 py-12 md:py-16">
     <p class="text-sm"><a href="../portfolio.html" class="text-cyan-400 hover:underline">&larr; Portfolio</a></p>
     <h1 class="mt-4 text-3xl font-bold tracking-tight text-slate-100">Sandbox terminal</h1>
-    <p class="mt-3 max-w-3xl text-slate-400">A terminal that runs real code in the page. Every demo is genuine JavaScript executed in an isolated worker &mdash; including modules that were written in TypeScript and compiled before shipping. Nothing leaves your browser.</p>
+    <p class="mt-3 max-w-3xl text-slate-400">A terminal that runs real code in the page. Every demo is genuine JavaScript executed in an isolated worker &mdash; including modules that were written in TypeScript and compiled before shipping. <code class="text-cyan-400">connect owner/repo</code> loads demos from a sandbox repository and runs them in that same worker.</p>
 
     <section class="sandbox" aria-label="Interactive sandbox terminal">
       <div class="sandbox__bar">
@@ -61,7 +61,20 @@
       </form>
     </section>
 
-    <p class="mt-3 text-xs text-slate-500">Up and down arrows walk your command history. <kbd class="text-cyan-400">Ctrl</kbd> + <kbd class="text-cyan-400">L</kbd> clears the screen. <kbd class="text-cyan-400">Esc</kbd> interrupts a running demo.</p>
+    <p class="mt-3 text-xs text-slate-500">Up and down arrows walk your command history. <kbd class="text-cyan-400">Ctrl</kbd> + <kbd class="text-cyan-400">L</kbd> clears the screen. <kbd class="text-cyan-400">Esc</kbd> interrupts a running demo, or cancels a connect that is still fetching.</p>
+
+    <section class="mt-12" aria-labelledby="connect-repo">
+      <h2 id="connect-repo" class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Connect a repository</h2>
+      <ol class="mt-6 max-w-3xl list-decimal space-y-4 pl-5 text-sm leading-relaxed text-slate-400">
+        <li>In that repository, add <code class="text-cyan-400">sandbox.json</code> at the root. <code class="text-cyan-400">schema</code> is <code class="text-cyan-400">1</code>, <code class="text-cyan-400">runner</code> is <code class="text-cyan-400">"worker"</code>, and <code class="text-cyan-400">demos</code> lists demo files relative to the manifest.</li>
+        <li>Each demo file is a classic script that calls <code class="text-cyan-400">Demos.define('name', { title, blurb, lang }, fn)</code>, the same shape as <code class="text-cyan-400">demos/collatz.js</code>. The name in that call is the command. Compile TypeScript first. Relative imports of other files in the repo work. Leave <code class="text-cyan-400">node:</code> imports out of those files; they run in a browser worker.</li>
+        <li>The repository has to be public. In the terminal above, type the commands below. <code class="text-cyan-400">connect owner/repo@ref</code> pins a tag, branch, or commit. A local server is <code class="text-cyan-400">connect http://127.0.0.1:8080/</code>. Opening this page with <code class="text-cyan-400">?sandbox=owner/repo</code> links it on load.</li>
+        <li><code class="text-cyan-400">demos</code> lists what was linked. <code class="text-cyan-400">run hello</code> runs one. <code class="text-cyan-400">link</code> shows the manifest URL. <code class="text-cyan-400">disconnect</code> drops the link and restores a built-in that shared a name.</li>
+      </ol>
+      <pre class="mt-6 max-w-3xl overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 text-sm leading-relaxed text-cyan-400">connect owner/repo
+demos
+run hello</pre>
+    </section>
 
     <section class="mt-12">
       <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">How this works</h2>
@@ -78,6 +91,10 @@
           <h3 class="text-base font-semibold text-slate-100">Isolated</h3>
           <p class="mt-2 text-sm leading-relaxed text-slate-400">Code runs in a Web Worker with no DOM access, in a throwaway scope, with a time limit. A runaway loop interrupts instead of freezing the page.</p>
         </article>
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+          <h3 class="text-base font-semibold text-slate-100">External sandboxes</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">A sandbox repo publishes <code class="text-cyan-400">sandbox.json</code> and demo files in the same shape as the ones here. Linking it fetches those files and resolves their relative imports against the repo.</p>
+        </article>
       </div>
     </section>
   </main>
@@ -93,8 +110,18 @@
     </div>
   </footer>
   <script src="../../js/site.js"></script>
+  <!--
+    Sandbox load order. Connecting a repo is `connect owner/repo` in the
+    terminal; the fetcher's header (sandbox-link.js) is the full contract.
+      worker-sandbox.js   runs a demo file in an isolated worker
+      demos/registry.js   Demos.define for built-ins, Demos.adopt for a link
+      sandbox-link.js     turns connect's argument into fetched demos
+      demos/*.js          built-in demos, each calling Demos.define
+      terminal.js         the command line, including connect / link / disconnect
+  -->
   <script src="worker-sandbox.js"></script>
   <script src="demos/registry.js"></script>
+  <script src="sandbox-link.js"></script>
   <script src="demos/collatz.js"></script>
   <script src="demos/type-basics.js"></script>
   <script src="terminal.js"></script>

@@ -11,6 +11,16 @@
    the time it runs in the worker). `Demos` is only touched at load time; the
    function below is self-contained and everything it needs arrives as `demo`
    and `args`. The sandbox finds it by the global it leaves behind.
+
+   A sandbox repository copies this file. List the copy in that repo's
+   sandbox.json, then from this terminal:
+
+     connect owner/repo
+     demos
+     run collatz
+
+   The string passed to Demos.define is the command. See the header of
+   sandbox-link.js for the other connect forms.
    =========================================================================== */
 
 async function collatz(args) {

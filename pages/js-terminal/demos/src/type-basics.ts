@@ -7,6 +7,9 @@
 
    The demo is deliberately self-contained: it is serialised and evaluated in a
    worker, so it cannot close over anything from module scope.
+
+   The browser runs the compiled .js. A sandbox repo lists that file in
+   sandbox.json and is linked with `connect owner/repo` (sandbox-link.js).
    =========================================================================== */
 
 type Question = {

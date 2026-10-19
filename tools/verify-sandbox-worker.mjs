@@ -17,7 +17,7 @@ const check = (name, cond, extra) => {
 };
 
 /* load the module with the browser globals it touches at definition time only */
-const sb = { self: {}, console, Blob: function () {}, URL: { createObjectURL: () => 'blob:x', revokeObjectURL() {} }, Worker: function () {} };
+const sb = { self: {}, console, Blob: function () {}, URL: globalThis.URL, Worker: function () {} };
 sb.self = sb;
 vm.runInNewContext(src, sb, { filename: 'worker-sandbox.js' });
 
@@ -67,10 +67,31 @@ const cases = [
     input: 'const x = 1;\nprint(x);',
     expectNoImport: false,
   },
+  {
+    name: 'relative import against a sandbox base',
+    input: 'import thing from "./thing.js";\nthing();',
+    baseUrl: 'https://cdn.jsdelivr.net/gh/acme/sandbox@main/demos/app.js',
+    expectPreamble: /var __m0 = await runner\.import\("https:\/\/cdn\.jsdelivr\.net\/gh\/acme\/sandbox@main\/demos\/thing\.js"\);/,
+    expectNoImport: true,
+  },
+  {
+    name: 'parent import against a sandbox base',
+    input: 'import util from "../lib/util.js";\nutil();',
+    baseUrl: 'https://cdn.jsdelivr.net/gh/acme/sandbox@main/demos/app.js',
+    expectPreamble: /var __m0 = await runner\.import\("https:\/\/cdn\.jsdelivr\.net\/gh\/acme\/sandbox@main\/lib\/util\.js"\);/,
+    expectNoImport: true,
+  },
+  {
+    name: 'absolute import is left absolute',
+    input: 'import thing from "https://cdn.example/thing.js";\nthing();',
+    baseUrl: 'https://cdn.jsdelivr.net/gh/acme/sandbox@main/demos/app.js',
+    expectPreamble: /var __m0 = await runner\.import\("https:\/\/cdn\.example\/thing\.js"\);/,
+    expectNoImport: true,
+  },
 ];
 
 for (const c of cases) {
-  const out = rw(c.input);
+  const out = rw(c.input, c.baseUrl);
   const all = out.preamble.join('\n');
   if (c.expectPreamble) check(c.name + ': resolved specifier', c.expectPreamble.test(all), all);
   if (c.expectBinding) check(c.name + ': binds names', c.expectBinding.test(all), all);
@@ -78,6 +99,10 @@ for (const c of cases) {
   if (c.expectNoImport) check(c.name + ': import statement removed', !/^\s*import\s/m.test(out.body), out.body);
   check(c.name + ': no eager top-level import left', !/^\s*import\s/m.test(out.body));
 }
+
+let nodeMessage = '';
+try { rw('import fs from "node:fs";\nfs.readFileSync();\n'); } catch (e) { nodeMessage = e.message; }
+check('node: import is rejected', /browser worker/.test(nodeMessage), nodeMessage);
 
 /* the rewritten body must still be valid JavaScript once wrapped the way the
    sandbox wraps it, otherwise the worker would die on a syntax error */
@@ -182,6 +207,7 @@ check('bootstrap declares the runner import helper', /__runner = \{/.test(bootTe
 check('bootstrap installs onmessage', /self\.onmessage = function/.test(bootText));
 check('bootstrap wraps source in new Function', /new Function\(/.test(bootText));
 check('bootstrap reports done/throw', /type: 'done'/.test(bootText) && /type: 'throw'/.test(bootText));
+check('bootstrap stamps output with the run id', /__runId/.test(bootText) && /msg\.runId/.test(bootText));
 check('bootstrap forwards console methods', /log:/.test(bootText) && /error:/.test(bootText));
 check('bootstrap exposes the demo API', /var demo = \{/.test(bootText));
 

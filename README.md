@@ -35,7 +35,8 @@ Save → back to `GitHub Actions`**. Full write-up in `TERMINAL.md` §7.7–7.8.
 | `pages/` | All other pages: about, portfolio, experience, education, resume, quotes, favorites. |
 | `pages/portfolio/` | Portfolio sub-section, including the 18 hosted PRG 147 exercises. |
 | `pages/templates/` | Starting points for new pages. `index.html` lists them; linked from the portfolio. |
-| `pages/js-terminal/` | The sandbox terminal: runs JavaScript and compiled TypeScript demos in the page. |
+| `pages/js-terminal/` | The sandbox terminal: runs JavaScript and compiled TypeScript demos in the page. `connect owner/repo` loads demos from another repository. Steps are on that page, in the header of `pages/js-terminal/sandbox-link.js`, and in `TERMINAL.md` §7.9. |
+| `sandbox.json` | Manifest that makes this repository a connect target for its own terminal. |
 | `styles/site.css` | Every style on the site, plus the colour tokens. |
 | `js/site.js` | Terminal chrome: boot sequence, status strip, small command line. |
 | `js/tailwind-config.js` | Font stacks. |
@@ -78,6 +79,7 @@ node tools/check-html.mjs [files]       # tag balance, ids, entities, local targ
 node tools/verify-terminal.mjs          # status strip behaviour + status paths
 node tools/verify-sandbox-terminal.mjs  # the sandbox terminal widget, commands, input
 node tools/verify-sandbox-worker.mjs    # import rewriting, module guard, worker bootstrap
+node tools/verify-sandbox-link.mjs      # external sandbox manifest, registration, import URLs
 node tools/verify-demos.mjs             # runs both shipped demos through the real pipeline
 node tools/audit.mjs                    # whole-site broken-link and chrome report
 node tools/asset-matrix.mjs             # which pages load which shared assets

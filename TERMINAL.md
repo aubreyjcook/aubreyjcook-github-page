@@ -775,18 +775,24 @@ query, which hides the readout cluster on narrow screens.
 ## 7. The sandbox terminal
 
 The status strip is flavour. The sandbox terminal is the one that **runs code**.
-It lives entirely under `pages/js-terminal/`:
+To run demos from another repository, type `connect owner/repo` in that
+terminal. The steps, the manifest, and the other target forms are in §7.9.
+The same instructions sit at the top of `pages/js-terminal/sandbox-link.js`.
+
+It lives entirely under `pages/js-terminal/`, plus a manifest at the repo root:
 
 | File | Role |
 | --- | --- |
 | `js-sandbox-terminal.html` | Page shell: site chrome plus the terminal window. |
 | `terminal.css` | Terminal styling. Consumes the `--term-*` tokens; introduces no new colour. |
-| `terminal.js` | The widget: scrollback, input, history, command dispatch. |
+| `terminal.js` | The widget: scrollback, input, history, command dispatch, sandbox linking. |
+| `sandbox-link.js` | Fetches an external repo's `sandbox.json` and registers its demos. |
 | `worker-sandbox.js` | Builds the isolated worker and ships a demo file into it. |
 | `demos/registry.js` | The `Demos.define` registry. Load first. Must not start with `_` — see §7.7. |
 | `demos/collatz.js` | A plain-JavaScript demo. |
 | `demos/type-basics.js` | A compiled TypeScript demo. |
 | `demos/src/type-basics.ts` | Its TypeScript source. Not loaded by the browser. |
+| `sandbox.json` (repo root) | This site as a connect target. Lists the two built-in demos. |
 
 ### 7.1 Why a worker
 
@@ -952,14 +958,17 @@ but its function body has no shared scope, and module syntax does not survive:
 | `demos`, `ls` | Registered demos, with language and source path |
 | `run <name> [args]` | Run a demo |
 | `<name> [args]` | Shorthand for `run` |
-| `source <name>` | The demo function exactly as the worker receives it |
+| `connect <target>` | Fetch a sandbox repo and register its demos. `owner/repo[@ref]`, `owner/repo@ref:path.json`, or an `https://` manifest URL. |
+| `disconnect` | Drop the linked demos. A built-in hidden by the same name comes back. |
+| `link` | Show the linked repo, or say that only built-ins are loaded. |
+| `source <name>` | The demo file exactly as the worker evaluates it |
 | `clear`, `cls` | Clear the scrollback |
 | `reset` | Terminate the worker; a fresh one starts on the next run |
 | `history` | Recent commands |
 | `about` | What the page is |
 
-Keyboard: up/down walk history, `Ctrl`+`L` clears, `Esc` clears the line or
-interrupts a running demo.
+Keyboard: up/down walk history, `Ctrl`+`L` clears, `Esc` clears the line,
+interrupts a running demo, or cancels an in-flight `connect`.
 
 ### 7.6 Verifying it
 
@@ -969,14 +978,15 @@ cannot execute in this sandbox. Everything around it is tested:
 ```sh
 node tools/verify-sandbox-terminal.mjs   # the widget: commands, styles, history, ask, busy guards
 node tools/verify-sandbox-worker.mjs     # import rewriting, module guard, bootstrap shape
+node tools/verify-sandbox-link.mjs       # manifest loading, registration, import base URLs
 node tools/verify-demos.mjs              # runs BOTH shipped demos through the real pipeline
 ```
 
-`verify-demos.mjs` is the strongest of the three: it drives the actual
-`Sandbox.run`, parses the source the sandbox generates, rebuilds the worker's
-scope, and executes the shipped demos for real — checking `collatz(6)` reaches 1
-in 8 steps, `collatz(27)` peaks at 9232, and the compiled TypeScript demo returns
-a score. It is not a browser; it is a rehearsal of the same contract.
+`verify-demos.mjs` drives the actual `Sandbox.run`, parses the source the sandbox
+generates, rebuilds the worker's scope, and executes the shipped demos for real.
+It checks that `collatz(6)` reaches 1 in 8 steps, `collatz(27)` peaks at 9232,
+and the compiled TypeScript demo returns a score. It is not a browser; it is a
+rehearsal of the same contract.
 
 These caught three genuine bugs and one wrong design:
 
@@ -1064,3 +1074,118 @@ alarming while the site content was fine.
 One contributing factor is artifact size: `archive/` is 245 files and 32 MB that
 nothing links to, and the deploy branch totals roughly 74 MB. That did not cause
 this wedge, but oversized artifacts make `updating_pages` timeouts more likely.
+
+### 7.9 Connecting the terminal to a repository
+
+Type these three lines in the sandbox terminal. The first fetches the repo.
+The second lists what arrived. The third runs one demo:
+
+```
+connect owner/repo
+demos
+run hello
+```
+
+`owner/repo` is a public GitHub repository. The terminal reads
+`sandbox.json` from the `main` branch through jsDelivr. `hello` is whatever
+name that repo passed to `Demos.define`.
+
+#### Every form of the target
+
+| You type | What is fetched |
+| --- | --- |
+| `connect owner/repo` | `https://cdn.jsdelivr.net/gh/owner/repo@main/sandbox.json` |
+| `connect owner/repo@v1` | the same file, at that tag, branch, or commit |
+| `connect owner/repo@v1:docs/sandbox.json` | a manifest that is not at the repo root |
+| `connect https://host/sandbox.json` | that URL |
+| `connect https://host/dir/` | `<dir>/sandbox.json` |
+| `connect http://127.0.0.1:8080/` | a local static server of the repo |
+
+The ref in `owner/repo@ref` cannot contain a slash. For a branch named
+`feature/demo`, pass the manifest's full https URL.
+
+Opening the page with the same string already linked:
+
+```
+pages/js-terminal/js-sandbox-terminal.html?sandbox=owner/repo
+```
+
+Encode the value when it is itself a URL:
+`?sandbox=http%3A%2F%2F127.0.0.1%3A8080%2F`.
+
+`link` prints the manifest URL and the demo names. `disconnect` drops the
+link. A linked demo whose name matches a built-in is the one `run` executes,
+and `disconnect` brings the built-in back. `Esc` cancels a connect that has
+not finished fetching. `source <name>` prints the file that was fetched and
+the URL it came from.
+
+`connect`, `disconnect`, and `link` are commands, so a demo should not use
+those names.
+
+#### What the repository contains
+
+`sandbox.json` at the place `connect` looks:
+
+```json
+{
+  "schema": 1,
+  "name": "my-sandbox",
+  "description": "One line, shown by link.",
+  "runner": "worker",
+  "demos": [
+    "demos/hello.js",
+    { "path": "demos/typed.js", "name": "typed" }
+  ]
+}
+```
+
+```
+sandbox.json
+demos/hello.js          classic script, calls Demos.define
+demos/lib.js            real ES module, imported as ./lib.js
+src/hello.ts            optional; name it from meta.source, it is not fetched
+```
+
+Demo paths are relative to the manifest. `..` and absolute URLs are refused.
+The `name` inside a demo entry is a hint. The command is the string in
+`Demos.define`, and that call has to be there or the file is skipped.
+
+Copy `pages/js-terminal/demos/collatz.js`. One demo per file. No top-level
+`export`, no top-level `return`. Metadata strings (`title`, `blurb`, `lang`,
+`source`) are plain single or double quotes. `source` is the path `demos`
+displays, usually the TypeScript file.
+
+```js
+async function hello(args) {
+  await demo.print('hello from ' + (args._[0] || 'the repo'));
+  return 'done';
+}
+
+Demos.define('hello', {
+  title: 'Hello',
+  blurb: 'One line describing it.',
+  lang: 'javascript',
+}, hello);
+```
+
+A relative import is loaded from the repo next to the demo file. The imported
+module is a real ES module and may use `export`. A bare specifier such as
+`import x from "some-pkg"` is left as written.
+
+`runner` is `"worker"`. The terminal runs the files in a browser worker, so a
+Node or TypeScript repository connects by compiling the demos to plain
+JavaScript and keeping `node:` imports out of that graph. A `node:` import is
+rejected before the worker starts, and the message says so.
+
+GitHub shorthand goes through **jsDelivr**, and the repository has to be
+public. The demo file is fetched as text. A relative import is a real module
+import, and browsers reject a module served as `text/plain`. jsDelivr serves
+JavaScript as JavaScript and allows cross-origin reads. A direct URL is used
+as given: that host sends `Access-Control-Allow-Origin` and a JavaScript MIME
+type. `connect http://127.0.0.1:8080/` is the local-dev form; the server has
+to do the same.
+
+This repository's root `sandbox.json` lists the two built-in demos, so
+`connect <owner>/<this-repo>` is a working example. The same instructions are
+the header comment of `pages/js-terminal/sandbox-link.js`.
+

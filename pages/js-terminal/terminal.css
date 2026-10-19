@@ -62,7 +62,8 @@
   background: rgba(138, 216, 255, 0.06);
 }
 
-.sandbox__state[data-state="RUNNING"] {
+.sandbox__state[data-state="RUNNING"],
+.sandbox__state[data-state="LINK"] {
   color: var(--term-ink);
   background: var(--term-accent);
   border-color: var(--term-accent);

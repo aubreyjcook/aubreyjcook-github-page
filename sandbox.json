@@ -1,0 +1,17 @@
+{
+  "//": "Connect this manifest from the sandbox terminal: connect <owner>/<repo>   then demos   then run collatz. Other forms (a ref, a manifest URL, a local server, ?sandbox=) are in pages/js-terminal/sandbox-link.js.",
+  "schema": 1,
+  "name": "aubreyjcook-github-page",
+  "description": "Built-in sandbox-terminal demos. An external sandbox repo publishes this same manifest.",
+  "runner": "worker",
+  "demos": [
+    {
+      "path": "pages/js-terminal/demos/collatz.js",
+      "name": "collatz"
+    },
+    {
+      "path": "pages/js-terminal/demos/type-basics.js",
+      "name": "type-basics"
+    }
+  ]
+}

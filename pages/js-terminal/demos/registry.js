@@ -28,14 +28,49 @@
    A demo may return a value; the terminal prints it. Throwing is fine too — the
    error is caught and shown with the run time.
 
-   To add one: write a self-contained function, call Demos.define, add a <script>
-   tag to js-sandbox-terminal.html, done. See TERMINAL.md §7.3.
+   To add one on this site: write a self-contained function, call Demos.define,
+   add a <script> tag to js-sandbox-terminal.html. See TERMINAL.md §7.3.
+
+   To connect a whole repository instead of adding a script tag, that repo
+   publishes sandbox.json and demo files in this same shape, and the terminal
+   runs `connect owner/repo`. sandbox-link.js fetches the files and registers
+   them with Demos.adopt (file text plus the URL the worker uses for relative
+   imports). A linked demo with the same name is the one `get` returns;
+   Demos.forget(origin) restores the built-in. The header of sandbox-link.js
+   is the command-by-command version of this.
    =========================================================================== */
 
 (function (global) {
   'use strict';
 
-  var registry = new Map();
+  /* More than one record can share a name: the built-in, and a linked repo
+     that overrides it. `project` is what commands see. */
+  var records = [];
+
+  function put(record) {
+    for (var i = 0; i < records.length; i += 1) {
+      if (records[i].name === record.name && records[i].origin === record.origin) {
+        records[i] = record;
+        return;
+      }
+    }
+    records.push(record);
+  }
+
+  /* Linked demos shadow built-ins. The first name keeps its place in the list
+     so a reconnect does not shuffle the built-in commands. */
+  function project() {
+    var order = [];
+    var byName = Object.create(null);
+    records.forEach(function (record) {
+      if (!byName[record.name]) order.push(record.name);
+      var prev = byName[record.name];
+      if (!prev || (prev.origin === 'built-in' && record.origin !== 'built-in')) {
+        byName[record.name] = record;
+      }
+    });
+    return order.map(function (name) { return byName[name]; });
+  }
 
   global.Demos = {
     /**
@@ -46,7 +81,7 @@
      * @param {Function} fn    async function (args) — self-contained
      */
     define: function (name, meta, fn) {
-      registry.set(name, {
+      put({
         name: name,
         title: (meta && meta.title) || name,
         blurb: (meta && meta.blurb) || '',
@@ -57,11 +92,49 @@
            Demos.define call that registers it. document.currentScript is the
            file being loaded right now, so its text is read here and kept. */
         fileText: readOwnSource(),
+        baseUrl: '',
+        origin: 'built-in',
+        link: '',
         run: fn,
       });
     },
-    list: function () { return Array.from(registry.values()); },
-    get: function (name) { return registry.get(name) || null; },
+
+    /**
+     * Register a demo whose source was fetched, not loaded as a page script.
+     * `origin` is the manifest URL; forget(origin) drops every demo from it.
+     */
+    adopt: function (record) {
+      if (!record || !record.name) throw new Error('adopt requires a name');
+      if (typeof record.fileText !== 'string') throw new Error('adopt requires file text');
+      put({
+        name: record.name,
+        title: record.title || record.name,
+        blurb: record.blurb || '',
+        lang: record.lang || 'javascript',
+        source: record.source || '',
+        fileText: record.fileText,
+        baseUrl: record.baseUrl || '',
+        origin: record.origin || 'remote',
+        link: record.link || '',
+        run: typeof record.run === 'function' ? record.run : null,
+      });
+    },
+
+    /** Drop every demo registered under `origin`. Returns how many were removed. */
+    forget: function (origin) {
+      var before = records.length;
+      records = records.filter(function (record) { return record.origin !== origin; });
+      return before - records.length;
+    },
+
+    list: function () { return project(); },
+    get: function (name) {
+      var found = null;
+      project().forEach(function (record) {
+        if (record.name === name) found = record;
+      });
+      return found;
+    },
   };
 
   function readOwnSource() {

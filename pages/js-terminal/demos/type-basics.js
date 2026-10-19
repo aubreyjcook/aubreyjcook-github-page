@@ -13,6 +13,10 @@
    function has no module context — so the `Demos.define` call below is how the
    compiled demo is handed over. Keeping the build output in the repository means
    the terminal downloads no compiler at run time.
+
+   A sandbox repo ships this compiled file (not the .ts) and lists it in
+   sandbox.json. From the terminal: connect owner/repo, then run type-basics.
+   The header of sandbox-link.js has the other connect forms.
    =========================================================================== */
 
 async function typeBasics(args) {

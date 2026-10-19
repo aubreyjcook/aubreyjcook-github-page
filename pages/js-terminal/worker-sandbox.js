@@ -12,16 +12,21 @@
    function with `new Function`, which is appended to the worker bootstrap —
    it evaluates in the worker's own realm, never in the page's.
 
+   A demo linked with `connect owner/repo` is the same call, plus a baseUrl:
+   the URL of the fetched file. Relative imports are rewritten against that
+   URL so `./lib.js` loads from the repository. Built-in demos pass no baseUrl.
+   `import "node:fs"` is rejected in resolveSpecifier; the worker is a browser.
+
    Message protocol, page  ->  worker:
      { type: 'run', id, source, args }
      { type: 'answer', id, value }          reply to a `demo.ask` request
      { type: 'abort' }                      terminate instantly
 
    worker  ->  page:
-     { type: 'out',   id, method, args }    print / warn / error line
-     { type: 'ask',   id, question }        needs input (answer is awaited)
-     { type: 'done',  id, ms }              finished normally
-     { type: 'throw', id, message, stack }  threw
+     { type: 'out',   runId, method, args }   print / warn / error line
+     { type: 'ask',   id, runId, question }   needs input (answer uses `id`)
+     { type: 'done',  id, runId, ms }         finished normally
+     { type: 'throw', id, runId, message, stack }
    =========================================================================== */
 
 (function (global) {
@@ -37,8 +42,15 @@
     '',
     'var __pending = new Map();',
     'var __askId = 0;',
+    'var __runId = 0;',
     '',
-    'function __send(msg) { self.postMessage(msg); }',
+    'function __send(msg) {',
+    '  /* `out` and `ask` are built away from the run handler, so stamp the run',
+    '     id here. The page keys its pending map by that id; `ask` keeps its own',
+    '     id for the answer. */',
+    '  if (msg && __runId && msg.runId == null) msg.runId = __runId;',
+    '  self.postMessage(msg);',
+    '}',
     '',
     '/* Minimal console: demo output is forwarded, the real one is untouched. */',
     'var console = {',
@@ -129,6 +141,7 @@
     '',
     '  var started = Date.now();',
     '  var id = msg.id;',
+    '  __runId = id;',
     '',
     '  Promise.resolve()',
     '    .then(function () {',
@@ -166,15 +179,42 @@
   var IMPORT_RE = /^[ \t]*import\s+([^;'"]+?)\s+from\s+['"]([^'"]+)['"]\s*;?[ \t]*$/gm;
   var BARE_RE = /^[ \t]*import\s+['"]([^'"]+)['"]\s*;?[ \t]*$/gm;
 
+  /* A blob worker resolves `./x.js` against the blob URL, which has no files.
+     Linked demos pass the demo file's own URL so relative imports land on the
+     sandbox repo. Bare specifiers are left untouched. `node:` is rejected here
+     because the worker is a browser, and a Node built-in would fail later as
+     an opaque network error. */
+  function resolveSpecifier(spec, baseUrl) {
+    if (/^node:/.test(spec)) {
+      throw new Error(
+        'demo imports "' + spec + '", a Node built-in. ' +
+        'This terminal runs demos in a browser worker. ' +
+        'Publish browser JavaScript and keep Node-only modules out of the demo graph.'
+      );
+    }
+    if (!baseUrl) return spec;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(spec)) return spec;
+    if (spec.charAt(0) !== '.' && spec.charAt(0) !== '/') return spec;
+    if (typeof URL !== 'function') return spec;
+    try {
+      return new URL(spec, baseUrl).href;
+    } catch (err) {
+      return spec;
+    }
+  }
+
   /* Rewrites static imports into awaited lookups and returns the binding code.
-     Handles default, named, aliased and namespace forms. */
-  function rewriteImports(source) {
+     Handles default, named, aliased and namespace forms.
+     `baseUrl` is the demo file's URL when the file was fetched from a sandbox
+     repo; built-in demos pass none. */
+  function rewriteImports(source, baseUrl) {
     var preamble = [];
     var n = 0;
 
     var body = source.replace(IMPORT_RE, function (whole, names, specifier) {
       var mod = '__m' + n++;
-      preamble.push('  var ' + mod + ' = await runner.import(' + JSON.stringify(specifier) + ');');
+      var resolved = resolveSpecifier(specifier, baseUrl);
+      preamble.push('  var ' + mod + ' = await runner.import(' + JSON.stringify(resolved) + ');');
 
       var clause = names.trim();
       var binding = [];
@@ -216,7 +256,7 @@
 
     /* bare `import "./side-effect.js"` */
     body = body.replace(BARE_RE, function (whole, specifier) {
-      preamble.push('  await runner.import(' + JSON.stringify(specifier) + ');');
+      preamble.push('  await runner.import(' + JSON.stringify(resolveSpecifier(specifier, baseUrl)) + ');');
       return '';
     });
 
@@ -264,9 +304,9 @@
      `module` and `exports` are injected by new Function so a file that prefers
      the CommonJS shape still works; `Demos` is injected so registration lands in
      the worker rather than on the global. */
-  function wrap(source) {
+  function wrap(source, baseUrl) {
     guardModuleSyntax(source);
-    var split = rewriteImports(source);
+    var split = rewriteImports(source, baseUrl);
     return [
       'return (async function () {',
       split.preamble.join('\n'),
@@ -297,7 +337,13 @@
 
       worker.onmessage = function (event) {
         var msg = event.data || {};
-        var entry = pending.get(msg.id);
+        var entry = pending.get(msg.runId);
+        if (!entry && msg.id != null) entry = pending.get(msg.id);
+        /* Output and questions are stamped with runId. If a message arrives
+           without one, a single in-flight run is the only place it can go. */
+        if (!entry && (msg.type === 'out' || msg.type === 'ask') && pending.size === 1) {
+          pending.forEach(function (candidate) { entry = candidate; });
+        }
         if (!entry) return;
 
         switch (msg.type) {
@@ -306,14 +352,16 @@
             break;
           case 'ask':
             Promise.resolve(askHandler ? askHandler(msg.question) : '')
-              .then(function (value) { worker.postMessage({ type: 'answer', id: msg.id, value: value }); });
+              .then(function (value) {
+                if (worker) worker.postMessage({ type: 'answer', id: msg.id, value: value });
+              });
             break;
           case 'done':
-            pending.delete(msg.id);
+            pending.delete(msg.runId != null && pending.has(msg.runId) ? msg.runId : msg.id);
             entry.resolve({ ok: true, ms: msg.ms });
             break;
           case 'throw':
-            pending.delete(msg.id);
+            pending.delete(msg.runId != null && pending.has(msg.runId) ? msg.runId : msg.id);
             entry.resolve({ ok: false, message: msg.message, stack: msg.stack });
             break;
         }
@@ -344,11 +392,22 @@
     return {
       /* Run a demo. `fileText` is the demo FILE's source, not one function: the
          worker re-evaluates the file so its Demos.define call can register.
+         `baseUrl` is that file's URL when it was fetched from a sandbox repo, so
+         relative imports resolve there. Built-in demos omit it.
          onOut(method, args) streams output lines. */
-      run: function (fileText, args, onOut, demoName) {
+      run: function (fileText, args, onOut, demoName, baseUrl) {
+        var source;
+        try {
+          source = wrap(String(fileText), baseUrl || '');
+        } catch (err) {
+          return Promise.resolve({
+            ok: false,
+            message: err && err.message ? err.message : String(err),
+            stack: err && err.stack ? String(err.stack) : '',
+          });
+        }
         ensureWorker();
         var id = ++seq;
-        var source = wrap(String(fileText));
 
         return new Promise(function (resolve) {
           pending.set(id, { resolve: resolve, onOut: onOut });

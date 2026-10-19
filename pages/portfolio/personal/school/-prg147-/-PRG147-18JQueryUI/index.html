@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>JQuery UI</title>
+    <meta name="description" content="">
+    <meta name="author" content="Aubrey J Cook">
+
+    <!-- Meta Data
+  -------------------------------------------------- -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Prompt|Righteous" rel="stylesheet">
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/javascript.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>JQuery UI</h1>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="row">
+                <div class="twelve columns">
+                    <p>Using JQuery to create a Dynamic UI</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <ul id="sdt_menu" class="sdt_menu">
+                        <li>
+                            <a href="#">
+                                <span id="natureMenuToggle">
+                                        <img src="images/nature/nature01.jpg" alt="" />
+                                        <span class="sdt_active"></span>
+                                <span class="sdt_wrap">
+                                        <span class="sdt_link">Nature</span>
+                                <span class="sdt_descr">Outdoor unihabited areas</span>
+                                </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span id="wildlifeMenuToggle">
+                                    <img src="images/wildlife/wildlife01.jpg" alt="" />
+                                    <span class="sdt_active"></span>
+                                <span class="sdt_wrap">
+                                        <span class="sdt_link">Wildlife</span>
+                                <span class="sdt_descr">Outdoor wildlife</span>
+                                </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span id="indoorsMenuToggle">
+                                    <img src="images/indoors/indoors01.jpg" alt="" />
+                                    <span class="sdt_active"></span>
+                                <span class="sdt_wrap">
+                                        <span class="sdt_link">Indoors</span>
+                                <span class="sdt_descr">Indoor inhabited areas</span>
+                                </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span id="outdoorsMenuToggle">
+                                    <img src="images/outdoors/outdoors01.jpg" alt="" />
+                                    <span class="sdt_active"></span>
+                                <span class="sdt_wrap">
+                                        <span class="sdt_link">Outdoors</span>
+                                <span class="sdt_descr">Outdoor inhabited areas</span>
+                                </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span id="objectMenuToggle">
+                                    <img src="images/objects/objects01.jpg" alt="" />
+                                    <span class="sdt_active"></span>
+                                <span class="sdt_wrap">
+                                        <span class="sdt_link">Objects</span>
+                                <span class="sdt_descr">Various unique items</span>
+                                </span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <div id="dropDownBar">
+                        <strong>
+                            Open/Hide
+                        </strong>
+                    </div>
+                    <div id="dropDownMenu">
+                        <div id="naturePhotos" class="photoBlock">
+                            <a href="images/nature/nature01.jpg">
+                                <figure>
+                                    <img src="images/nature/nature01.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature02.jpg">
+                                <figure>
+                                    <img src="images/nature/nature02.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature03.jpg">
+                                <figure>
+                                    <img src="images/nature/nature03.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature04.jpg">
+                                <figure>
+                                    <img src="images/nature/nature04.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature05.jpg">
+                                <figure>
+                                    <img src="images/nature/nature05.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature06.jpg">
+                                <figure>
+                                    <img src="images/nature/nature06.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature07.jpg">
+                                <figure>
+                                    <img src="images/nature/nature07.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature08.jpg">
+                                <figure>
+                                    <img src="images/nature/nature08.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/nature/nature09.jpg">
+                                <figure>
+                                    <img src="images/nature/nature09.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div id="wildlifePhotos" class="photoBlock">
+                            <a href="images/wildlife/wildlife01.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife01.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife02.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife02.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife03.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife03.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife04.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife04.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife05.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife05.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife06.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife06.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife07.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife07.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife08.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife08.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife09.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife09.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife010.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife010.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife011.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife011.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/wildlife/wildlife012.jpg">
+                                <figure>
+                                    <img src="images/wildlife/wildlife012.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div id="indoorPhotos" class="photoBlock">
+                            <a href="images/indoors/indoors01.jpg">
+                                <figure>
+                                    <img src="images/indoors/indoors01.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/indoors/indoors02.jpg">
+                                <figure>
+                                    <img src="images/indoors/indoors02.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/indoors/indoors03.jpg">
+                                <figure>
+                                    <img src="images/indoors/indoors03.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/indoors/indoors04.jpg">
+                                <figure>
+                                    <img src="images/indoors/indoors04.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/indoors/indoors05.jpg">
+                                <figure>
+                                    <img src="images/indoors/indoors05.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div id="outdoorPhotos" class="photoBlock">
+                            <a href="images/outdoors/outdoors01.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors01.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors02.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors02.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors03.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors03.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors04.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors04.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors05.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors05.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors06.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors06.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors07.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors07.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors08.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors08.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/outdoors/outdoors09.jpg">
+                                <figure>
+                                    <img src="images/outdoors/outdoors09.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div id="objectPhotos" class="photoBlock">
+                            <a href="images/objects/objects01.jpg">
+                                <figure>
+                                    <img src="images/objects/objects01.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects02.jpg">
+                                <figure>
+                                    <img src="images/objects/objects02.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects03.jpg">
+                                <figure>
+                                    <img src="images/objects/objects03.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects04.jpg">
+                                <figure>
+                                    <img src="images/objects/objects04.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects05.jpg">
+                                <figure>
+                                    <img src="images/objects/objects05.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects06.jpg">
+                                <figure>
+                                    <img src="images/objects/objects06.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects07.jpg">
+                                <figure>
+                                    <img src="images/objects/objects07.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects08.jpg">
+                                <figure>
+                                    <img src="images/objects/objects08.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects09.jpg">
+                                <figure>
+                                    <img src="images/objects/objects09.jpg" />
+                                </figure>
+                            </a>
+                            <a href="images/objects/objects010.jpg">
+                                <figure>
+                                    <img src="images/objects/objects010.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="row">
+                <div class="twelve columns">
+                    <a href="../index.html" class="button"> &#10096; PRG 147 index</a>
+                    <a href="http://aubreyjcook.com/" target="_blank">
+                        <h5>&copy; Aubrey J Cook, 2016</h5>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>

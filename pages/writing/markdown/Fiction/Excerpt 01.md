@@ -1,0 +1,1 @@
+The moonlight finds it's way, shining over the black pool, at the deep bottom of the chasm of wailing souls. Hidden in that vast accursed desert, the wasteland abandoned by dying gods.

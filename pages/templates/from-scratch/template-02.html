@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From-scratch template 02</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../../../js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../../../styles/site.css">
+</head>
+<body class="flex min-h-screen flex-col bg-zinc-950 font-sans text-slate-100 antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-black">Skip to content</a>
+  <header class="border-b border-zinc-800 px-4 py-6 text-center">
+    <h1 class="text-2xl font-bold"><a href="../../../index.html">Aubrey J Cook</a></h1>
+    <p class="mt-1 text-xs uppercase tracking-[0.22em] text-slate-500">Programmer</p>
+  </header>
+  <nav class="border-b border-zinc-800 px-4 py-3 text-center text-sm text-slate-400" aria-label="Primary">
+    <a class="mx-2 hover:text-cyan-400" href="../../../index.html">Home</a>
+    <a class="mx-2 hover:text-cyan-400" href="../../portfolio.html">Portfolio</a>
+    <a class="mx-2 hover:text-cyan-400" href="../../experience.html">Experience</a>
+    <a class="mx-2 hover:text-cyan-400" href="../../education.html">Education</a>
+    <a class="mx-2 hover:text-cyan-400" href="../../resume.html">Resume</a>
+  </nav>
+  <main id="main-content" class="mx-auto w-full max-w-3xl flex-1 px-4 py-12">
+    <h2 class="text-xl font-semibold">Template 02</h2>
+    <p class="mt-4 text-slate-400">Centred name block, a full primary nav, and the site footer. Copy this file and put page content inside <code class="text-cyan-400">#main-content</code>.</p>
+  </main>
+  <footer class="border-t border-zinc-800 px-4 py-6 text-center text-sm text-slate-500">
+    <a class="text-slate-400 hover:text-cyan-400" href="https://github.com/aubreyjcook" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </footer>
+  <script src="../../../js/site.js"></script>
+</body>
+</html>

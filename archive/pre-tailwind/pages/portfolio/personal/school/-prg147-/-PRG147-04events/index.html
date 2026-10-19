@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>JavaScript Events</title>
+    <meta name="description" content="">
+    <meta name="author" content="Aubrey J Cook">
+
+    <!-- Meta Data
+  -------------------------------------------------- -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Prompt|Righteous" rel="stylesheet">
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="js/javascript.js"></script>
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>JavaScript Events</h1>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="row">
+                <div class="twelve columns">
+                    <p>A demonstration of Javascript responding to different DOM level events.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <p onclick="displayAlert()">Click your mouse over this text to generate an alert.</p>
+                    <p ondblclick="displayAlert()">Click your mouse <strong>twice</strong> over this text to generate an alert.</p>
+                    <p>Highlight the text in this form field to read the hidden message:
+                        <input type="text" id="hiddenMessage" value="Select me!" onselect="hiddenText()">
+                    </p>
+                    <p>Start to input in this field and it will be highlighted:
+                        <input type="text" onfocus="focusField(this)" onblur="blurField(this)">
+                    </p>
+
+                </div>
+                <div class="six columns">
+                    <p>Mouse over this image and it will change and then swap back when you move your mouse off it.</p>
+                    <img id="imageSwap" src="images/picture01.jpg" onmouseenter="imageSwapEnter()" onmouseleave="imageSwapExit()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <div class="dropTarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <p ondragstart="dragStart(event)" ondrag="dragging(event)" draggable="true" id="dragTarget">Drag this text to the other box.</p>
+                    </div>
+                    <div class="dropTarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <p id="dragStatusText"></p>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="row">
+                <div class="twelve columns">
+                    <a href="../index.html" class="button"> &#10096; PRG 147 index</a>
+                    <a href="http://aubreyjcook.com/" target="_blank">
+                        <h5>&copy; Aubrey J Cook, 2016</h5>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>

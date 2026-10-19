@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repositories — Aubrey J Cook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../styles/site.css">
+</head>
+<body class="flex min-h-screen flex-col bg-zinc-950 font-sans text-slate-100 antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-black">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/85 backdrop-blur">
+    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
+      <a href="../index.html" class="min-w-0">
+        <span class="block text-lg font-bold tracking-tight text-slate-100">Aubrey J Cook</span>
+        <span class="block text-[11px] uppercase tracking-[0.22em] text-slate-500">Programmer</span>
+      </a>
+      <nav class="hidden items-center gap-6 text-sm md:flex" aria-label="Primary">
+        <a href="../index.html" class="text-slate-400 transition hover:text-slate-100">Home</a>
+        <a href="portfolio.html" class="text-cyan-400">Portfolio</a>
+        <a href="experience.html" class="text-slate-400 transition hover:text-slate-100">Experience</a>
+        <a href="education.html" class="text-slate-400 transition hover:text-slate-100">Education</a>
+        <a href="resume.html" class="text-slate-400 transition hover:text-slate-100">Resume</a>
+      </nav>
+      <button type="button" id="nav-toggle" class="inline-flex items-center justify-center rounded-md border border-zinc-700 p-2 text-slate-300 md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-zinc-800 px-4 py-3 md:hidden" aria-label="Mobile">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 text-sm">
+        <a href="../index.html" class="text-slate-400">Home</a>
+        <a href="portfolio.html" class="text-cyan-400">Portfolio</a>
+        <a href="experience.html" class="text-slate-400">Experience</a>
+        <a href="education.html" class="text-slate-400">Education</a>
+        <a href="resume.html" class="text-slate-400">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="mx-auto w-full max-w-5xl flex-1 px-4 py-12 md:py-16">
+    <p class="text-sm"><a href="portfolio.html" class="text-cyan-400 hover:underline">&larr; Portfolio</a></p>
+    <h1 class="mt-4 text-3xl font-bold tracking-tight text-slate-100">Repositories</h1>
+    <p class="mt-3 max-w-3xl text-slate-400">The code index. Everything here is public on GitHub; entries link straight to the source.</p>
+
+    <!-- local section nav -->
+    <nav class="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y border-zinc-800 py-3 text-sm" aria-label="Portfolio sections">
+      <a href="portfolio.html" class="text-slate-400 transition hover:text-cyan-400">Overview</a>
+      <a href="student-work.html" class="text-slate-400 transition hover:text-cyan-400">Student work</a>
+      <span class="text-cyan-400" aria-current="page">Repositories</span>
+      <a href="portfolio/personal/reactjs/reactjs.html" class="text-slate-400 transition hover:text-cyan-400">React.js</a>
+      <a href="js-terminal/js-sandbox-terminal.html" class="text-slate-400 transition hover:text-cyan-400">JS terminal</a>
+    </nav>
+
+    <section class="mt-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Start here</h2>
+      <p class="mt-3 max-w-3xl leading-relaxed text-slate-300">The coursework is the oldest work in the account and the clearest record of where the programming started &mdash; a community-college sequence running from Processing and C++ in 2016, through a full semester of Java and data structures in 2018, to server-side PHP in 2020.</p>
+      <a href="student-work.html" class="mt-5 inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/40 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-500/40">Student work &mdash; 25 course repositories &rarr;</a>
+    </section>
+
+    <!-- ===================== ACTIVE DEVELOPMENT ===================== -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Active development</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Current work in the <code class="text-cyan-400">dev_*</code> namespace &mdash; TypeScript and Next.js applications, agent tooling, and a Rust static site generator.</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/dev_go-kart" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">dev_go-kart</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Development for a go-kart website.</p>
+          <p class="mt-3 text-xs text-slate-500">TypeScript &middot; deployed on Vercel</p>
+        </article>
+
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/ajc.gh.pages.next" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">ajc.gh.pages.next</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Next.js implementation of this personal site.</p>
+          <p class="mt-3 text-xs text-slate-500">TypeScript &middot; MPL-2.0</p>
+        </article>
+
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/dev_rust-ssg.ajc" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">dev_rust-ssg.ajc</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Static site generator written in Rust.</p>
+          <p class="mt-3 text-xs text-slate-500">Rust</p>
+        </article>
+
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/dev_js-agent.ajc" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">dev_js-agent.ajc</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Node-based agent.</p>
+          <p class="mt-3 text-xs text-slate-500">JavaScript</p>
+        </article>
+
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/dev_rust-agent.ajc" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">dev_rust-agent.ajc</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Agent tooling implemented in Rust.</p>
+          <p class="mt-3 text-xs text-slate-500">Rust</p>
+        </article>
+
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/dev_2xcook" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">dev_2xcook</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Site project published to GitHub Pages.</p>
+          <p class="mt-3 text-xs text-slate-500">GitHub Pages</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===================== SITES AND TEMPLATES ===================== -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Sites &amp; templates</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Reusable UI starting points and deployments of the personal site.</p>
+      <ul class="mt-6 divide-y divide-zinc-800 rounded-xl border border-zinc-800">
+        <li>
+          <a href="https://github.com/aubreyjcook/dev_UI_Templates.ajc" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">dev_UI_Templates.ajc</span>
+            <span class="mt-1 block text-sm text-slate-400">A place to put templates for various kinds of user interfaces. GPL-3.0.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/dev_aubreyjcook.next" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">dev_aubreyjcook.next</span>
+            <span class="mt-1 block text-sm text-slate-400">Next.js development of the personal site.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/wp-gh-pages-static" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">wp-gh-pages-static</span>
+            <span class="mt-1 block text-sm text-slate-400">Static export pipeline for WordPress content on GitHub Pages. MPL-2.0.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/short-term-rental-property" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">short-term-rental-property</span>
+            <span class="mt-1 block text-sm text-slate-400">Short-term rental property site.</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== TOOLING AND INFRASTRUCTURE ===================== -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Tooling &amp; infrastructure</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Automation, environments, and experiments that support the rest of the work.</p>
+      <ul class="mt-6 divide-y divide-zinc-800 rounded-xl border border-zinc-800">
+        <li>
+          <a href="https://github.com/aubreyjcook/dev_auto-website-audit" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">dev_auto-website-audit</span>
+            <span class="mt-1 block text-sm text-slate-400">Automated website auditing.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/git_obsidian.ajc" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">git_obsidian.ajc</span>
+            <span class="mt-1 block text-sm text-slate-400">Git-based repo for implementation of the Obsidian git plugin.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/test_wp-docker" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">test_wp-docker</span>
+            <span class="mt-1 block text-sm text-slate-400">Docker-based WordPress test environment.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/cursor-sandbox-001" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">cursor-sandbox-001</span>
+            <span class="mt-1 block text-sm text-slate-400">Editor sandbox.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/edu_tutorial.ac" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">edu_tutorial.ac</span>
+            <span class="mt-1 block text-sm text-slate-400">Tutorial material.</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== SITE SOURCE ===================== -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">This site</h2>
+      <ul class="mt-6 divide-y divide-zinc-800 rounded-xl border border-zinc-800">
+        <li>
+          <a href="https://github.com/aubreyjcook/aubreyjcook-github-page" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">aubreyjcook-github-page</span>
+            <span class="mt-1 block text-sm text-slate-400">Personal website via GitHub Pages. MIT.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/aubreyjcook" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">aubreyjcook</span>
+            <span class="mt-1 block text-sm text-slate-400">GitHub profile repository.</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-12 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-lg font-semibold text-slate-100">Still being catalogued</h2>
+      <p class="mt-3 text-sm leading-relaxed text-slate-300">The account holds 155 public repositories and this index currently covers the ones with enough context to describe accurately. The remainder &mdash; further coursework, forks, and one-off experiments &mdash; is linked below and will be folded in here.</p>
+      <a href="https://github.com/aubreyjcook?tab=repositories" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center rounded-md bg-cyan-400 px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-300">Browse all 155 repositories</a>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-800">
+    <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-8 text-center">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-slate-400">
+        <a class="transition hover:text-cyan-400" href="https://github.com/aubreyjcook" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="transition hover:text-cyan-400" href="https://www.linkedin.com/in/aubrey-cook-9b6922152/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="transition hover:text-cyan-400" href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
+      </div>
+      <p class="text-xs italic text-slate-500">“Computers are like old testament gods. Lots of rules, and no mercy.”</p>
+    </div>
+  </footer>
+  <script src="../js/site.js"></script>
+</body>
+</html>

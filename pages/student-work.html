@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student work — Aubrey J Cook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../styles/site.css">
+</head>
+<body class="flex min-h-screen flex-col bg-zinc-950 font-sans text-slate-100 antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-black">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/85 backdrop-blur">
+    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
+      <a href="../index.html" class="min-w-0">
+        <span class="block text-lg font-bold tracking-tight text-slate-100">Aubrey J Cook</span>
+        <span class="block text-[11px] uppercase tracking-[0.22em] text-slate-500">Programmer</span>
+      </a>
+      <nav class="hidden items-center gap-6 text-sm md:flex" aria-label="Primary">
+        <a href="../index.html" class="text-slate-400 transition hover:text-slate-100">Home</a>
+        <a href="portfolio.html" class="text-cyan-400">Portfolio</a>
+        <a href="experience.html" class="text-slate-400 transition hover:text-slate-100">Experience</a>
+        <a href="education.html" class="text-slate-400 transition hover:text-slate-100">Education</a>
+        <a href="resume.html" class="text-slate-400 transition hover:text-slate-100">Resume</a>
+      </nav>
+      <button type="button" id="nav-toggle" class="inline-flex items-center justify-center rounded-md border border-zinc-700 p-2 text-slate-300 md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-zinc-800 px-4 py-3 md:hidden" aria-label="Mobile">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 text-sm">
+        <a href="../index.html" class="text-slate-400">Home</a>
+        <a href="portfolio.html" class="text-cyan-400">Portfolio</a>
+        <a href="experience.html" class="text-slate-400">Experience</a>
+        <a href="education.html" class="text-slate-400">Education</a>
+        <a href="resume.html" class="text-slate-400">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="mx-auto w-full max-w-5xl flex-1 px-4 py-12 md:py-16">
+    <p class="text-sm"><a href="portfolio.html" class="text-cyan-400 hover:underline">&larr; Portfolio</a></p>
+    <h1 class="mt-4 text-3xl font-bold tracking-tight text-slate-100">Student work</h1>
+    <p class="mt-3 max-w-3xl text-slate-400">Course repositories from 2016 onward, preserved as written. These are the oldest commits in the account and the record of learning the fundamentals in order: procedural code, then object orientation, then the web stack.</p>
+
+    <nav class="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y border-zinc-800 py-3 text-sm" aria-label="Portfolio sections">
+      <a href="portfolio.html" class="text-slate-400 transition hover:text-cyan-400">Overview</a>
+      <span class="text-cyan-400" aria-current="page">Student work</span>
+      <a href="repositories.html" class="text-slate-400 transition hover:text-cyan-400">Repositories</a>
+      <a href="portfolio/personal/reactjs/reactjs.html" class="text-slate-400 transition hover:text-cyan-400">React.js</a>
+      <a href="js-terminal/js-sandbox-terminal.html" class="text-slate-400 transition hover:text-cyan-400">JS terminal</a>
+    </nav>
+
+    <section class="mt-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">The courses, in order</h2>
+      <div class="mt-6 overflow-x-auto rounded-xl border border-zinc-800">
+        <table class="w-full min-w-[34rem] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-xs uppercase tracking-[0.14em] text-slate-500">
+              <th scope="col" class="px-4 py-3 font-semibold">Term</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Course</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Subject</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Language</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Repos</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-800 text-slate-300">
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap text-slate-500">Spring 2016</td>
+              <td class="px-4 py-3 font-semibold text-slate-100">PRG 105</td>
+              <td class="px-4 py-3">Programming fundamentals via Processing</td>
+              <td class="px-4 py-3 text-slate-400">Processing / Java</td>
+              <td class="px-4 py-3 text-slate-400">1</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap text-slate-500">Spring 2016</td>
+              <td class="px-4 py-3 font-semibold text-slate-100">PRG 110</td>
+              <td class="px-4 py-3">Programming fundamentals in C++</td>
+              <td class="px-4 py-3 text-slate-400">C++</td>
+              <td class="px-4 py-3 text-slate-400">1</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap text-slate-500">Spring 2016</td>
+              <td class="px-4 py-3 font-semibold text-slate-100">WEB 105</td>
+              <td class="px-4 py-3">Intro to web development, HTML/CSS and WordPress</td>
+              <td class="px-4 py-3 text-slate-400">HTML</td>
+              <td class="px-4 py-3 text-slate-400">1</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap text-slate-500">Summer 2016</td>
+              <td class="px-4 py-3 font-semibold text-slate-100">WEB 115</td>
+              <td class="px-4 py-3">Advanced front-end web development</td>
+              <td class="px-4 py-3 text-slate-400">HTML / CSS</td>
+              <td class="px-4 py-3 text-slate-400">9</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap text-slate-500">2016</td>
+              <td class="px-4 py-3 font-semibold text-slate-100">PRG 147</td>
+              <td class="px-4 py-3">JavaScript, start to jQuery UI</td>
+              <td class="px-4 py-3 text-slate-400">JavaScript</td>
+              <td class="px-4 py-3 text-slate-400">18 exercises</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap text-slate-500">Spring 2018</td>
+              <td class="px-4 py-3 font-semibold text-slate-100">CSC 275</td>
+              <td class="px-4 py-3">Object-oriented programming and data structures</td>
+              <td class="px-4 py-3 text-slate-400">Java</td>
+              <td class="px-4 py-3 text-slate-400">15</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap text-slate-500">Spring 2020</td>
+              <td class="px-4 py-3 font-semibold text-slate-100">CSC 453</td>
+              <td class="px-4 py-3">Server-side web programming</td>
+              <td class="px-4 py-3 text-slate-400">PHP</td>
+              <td class="px-4 py-3 text-slate-400">2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Programming fundamentals &mdash; spring 2016</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Where the code starts. Two introductory courses run in parallel, one through Processing and one in C++, covering variables, control flow, functions, and the first objects.</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/prg105" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">prg105</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Processing class (Java), spring 2016. Creative-coding exercises: drawing, animation, and interaction in a visual sketch environment.</p>
+          <p class="mt-3 text-xs text-slate-500">Processing &middot; Java &middot; 2016</p>
+        </article>
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/prg110" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">prg110</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">C++ class, spring 2016. Compiled-language fundamentals: types, arrays, functions, and the beginnings of object orientation.</p>
+          <p class="mt-3 text-xs text-slate-500">C++ &middot; 2016</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Web development sequence &mdash; 2016</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Three courses building the front end from bare markup upward. This is the stack the current site is still written in, and the first appearance of the WordPress work that later became professional.</p>
+
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/web105" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">web105</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Intro to web development &mdash; HTML, CSS, and WordPress, spring 2016.</p>
+          <p class="mt-3 text-xs text-slate-500">HTML &middot; 2016</p>
+        </article>
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="https://github.com/aubreyjcook/web115" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">web115</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Advanced front-end web development &mdash; HTML and CSS, summer 2016.</p>
+          <p class="mt-3 text-xs text-slate-500">HTML &middot; 2016</p>
+        </article>
+      </div>
+
+      <h3 class="mt-8 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Layout and front-end craft</h3>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Self-contained exercises where the markup and stylesheet are the whole point.</p>
+      <ul class="mt-5 divide-y divide-zinc-800 rounded-xl border border-zinc-800">
+        <li>
+          <a href="https://github.com/aubreyjcook/semantic" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">semantic</span>
+            <span class="mt-1 block text-sm text-slate-400">Semantic markup exercise &mdash; choosing elements for meaning rather than appearance.</span>
+            <span class="mt-1 block text-xs text-slate-500">HTML &middot; 2016</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/photoGallery" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">photoGallery</span>
+            <span class="mt-1 block text-sm text-slate-400">Photo gallery layout.</span>
+            <span class="mt-1 block text-xs text-slate-500">HTML &middot; 2016</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/CSSMenu" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">CSSMenu</span>
+            <span class="mt-1 block text-sm text-slate-400">Pure-CSS drop-down menu project.</span>
+            <span class="mt-1 block text-xs text-slate-500">CSS &middot; 2016</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/JavaScriptLab" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">JavaScriptLab</span>
+            <span class="mt-1 block text-sm text-slate-400">JavaScript laboratory work &mdash; scripting behaviour onto static pages.</span>
+            <span class="mt-1 block text-xs text-slate-500">JavaScript &middot; 2016</span>
+          </a>
+        </li>
+      </ul>
+
+      <h3 class="mt-8 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Server side</h3>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">PHP coursework. Server-side work is the through-line from here to the WordPress multisite development done professionally later.</p>
+      <ul class="mt-5 divide-y divide-zinc-800 rounded-xl border border-zinc-800">
+        <li>
+          <a href="https://github.com/aubreyjcook/PHPLab" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">PHPLab</span>
+            <span class="mt-1 block text-sm text-slate-400">PHP laboratory exercises.</span>
+            <span class="mt-1 block text-xs text-slate-500">PHP &middot; 2016</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/aubreyjcook/ProductShowcase" target="_blank" rel="noopener noreferrer" class="block px-5 py-4 transition hover:bg-zinc-900">
+            <span class="font-semibold text-slate-100">ProductShowcase</span>
+            <span class="mt-1 block text-sm text-slate-400">Product showcase built with PHP.</span>
+            <span class="mt-1 block text-xs text-slate-500">PHP &middot; 2016</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-6 rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+        <h3 class="text-base font-semibold text-slate-100"><a href="portfolio/personal/school/school.html" class="hover:text-cyan-400">PRG 147 &mdash; JavaScript, in full</a></h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-400">Eighteen assignments are hosted here on the site as working pages, not just source: variables and math, functions, events, forms, dates, string formatting, a hangman game, loops, timers, optimization, validation, the DOM, jQuery, jQuery animations, jQuery HTML/CSS manipulation, and jQuery UI.</p>
+        <p class="mt-3 text-xs text-slate-500">18 exercises &middot; browsable and runnable in place</p>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Object orientation &amp; data structures &mdash; CSC 275, spring 2018</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">A full semester of Java across fifteen repositories: weekly labs, graded assignments, a midterm, and a final. This is the largest single block of coursework in the account, and where classes, collections, and inheritance were worked through properly.</p>
+
+      <h3 class="mt-6 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Labs</h3>
+      <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-ACookLab04StudentArrayList" target="_blank" rel="noopener noreferrer">Lab 04 &mdash; Student ArrayList</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-ACookLab05" target="_blank" rel="noopener noreferrer">Lab 05</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-ACookLab06" target="_blank" rel="noopener noreferrer">Lab 06</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Lab07" target="_blank" rel="noopener noreferrer">Lab 07</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Lab08" target="_blank" rel="noopener noreferrer">Lab 08</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Lab09" target="_blank" rel="noopener noreferrer">Lab 09</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Lab10" target="_blank" rel="noopener noreferrer">Lab 10</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Lab11" target="_blank" rel="noopener noreferrer">Lab 11</a></li>
+      </ul>
+
+      <h3 class="mt-8 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Assignments and exams</h3>
+      <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-ACookAssignment03" target="_blank" rel="noopener noreferrer">Assignment 03</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Assignment04" target="_blank" rel="noopener noreferrer">Assignment 04</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Assignment05" target="_blank" rel="noopener noreferrer">Assignment 05</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Midterm" target="_blank" rel="noopener noreferrer">Midterm</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC275-Final" target="_blank" rel="noopener noreferrer">Final</a></li>
+      </ul>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Server side, continued &mdash; CSC 453, spring 2020</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Later coursework returning to the server: PHP and the LAMP stack, taken after the professional WordPress work had already begun.</p>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC453-Assignment03" target="_blank" rel="noopener noreferrer">CSC 453 &mdash; Assignment 03</a></li>
+        <li><a class="block rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-500/40" href="https://github.com/aubreyjcook/-CSC453-Assignment04" target="_blank" rel="noopener noreferrer">CSC 453 &mdash; Assignment 04</a></li>
+      </ul>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Where the coursework led</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Two threads from this period turn up again later in the account.</p>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="portfolio/personal/reactjs/reactjs.html" class="hover:text-cyan-400">From jQuery to React</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">PRG 147 ends at jQuery UI. The component model that replaced it is where the front-end work sits now &mdash; see the personal projects for the React and Next.js material.</p>
+        </article>
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="repositories.html" class="hover:text-cyan-400">From PHP to production</a></h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">The PHP and WordPress exercises became professional multisite work at the Center for Inquiry, and later the static-export pipeline for WordPress content on GitHub Pages.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-lg font-semibold text-slate-100">Coverage note</h2>
+      <p class="mt-3 text-sm leading-relaxed text-slate-300">This page catalogues the course repositories described so far. The account holds further student work &mdash; additional course folders, exercise sets, and practice repositories &mdash; that has not been written up here yet, and more of the 2018&ndash;2020 coursework exists than is listed above. Nothing here is edited from the original commits.</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="https://github.com/aubreyjcook?tab=repositories" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-md bg-cyan-400 px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-300">All repositories</a>
+        <a href="repositories.html" class="inline-flex items-center rounded-md border border-zinc-800 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-500/40">Full code index &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-800">
+    <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-8 text-center">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-slate-400">
+        <a class="transition hover:text-cyan-400" href="https://github.com/aubreyjcook" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="transition hover:text-cyan-400" href="https://www.linkedin.com/in/aubrey-cook-9b6922152/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="transition hover:text-cyan-400" href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
+      </div>
+      <p class="text-xs italic text-slate-500">“Computers are like old testament gods. Lots of rules, and no mercy.”</p>
+    </div>
+  </footer>
+  <script src="../js/site.js"></script>
+</body>
+</html>

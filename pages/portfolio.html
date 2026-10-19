@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Aubrey J Cook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../styles/site.css">
+</head>
+<body class="flex min-h-screen flex-col bg-zinc-950 font-sans text-slate-100 antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-black">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/85 backdrop-blur">
+    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
+      <a href="../index.html" class="min-w-0">
+        <span class="block text-lg font-bold tracking-tight text-slate-100">Aubrey J Cook</span>
+        <span class="block text-[11px] uppercase tracking-[0.22em] text-slate-500">Programmer</span>
+      </a>
+      <nav class="hidden items-center gap-6 text-sm md:flex" aria-label="Primary">
+        <a href="../index.html" class="text-slate-400 transition hover:text-slate-100">Home</a>
+        <a href="portfolio.html" class="text-cyan-400" aria-current="page">Portfolio</a>
+        <a href="experience.html" class="text-slate-400 transition hover:text-slate-100">Experience</a>
+        <a href="education.html" class="text-slate-400 transition hover:text-slate-100">Education</a>
+        <a href="resume.html" class="text-slate-400 transition hover:text-slate-100">Resume</a>
+      </nav>
+      <button type="button" id="nav-toggle" class="inline-flex items-center justify-center rounded-md border border-zinc-700 p-2 text-slate-300 md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-zinc-800 px-4 py-3 md:hidden" aria-label="Mobile">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 text-sm">
+        <a href="../index.html" class="text-slate-400">Home</a>
+        <a href="portfolio.html" class="text-cyan-400" aria-current="page">Portfolio</a>
+        <a href="experience.html" class="text-slate-400">Experience</a>
+        <a href="education.html" class="text-slate-400">Education</a>
+        <a href="resume.html" class="text-slate-400">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="mx-auto w-full max-w-5xl flex-1 px-4 py-12 md:py-16">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-100">Portfolio</h1>
+    <p class="mt-3 max-w-2xl text-slate-400">Professional work, personal projects, and the coursework this all started with.</p>
+
+    <!-- ================= professional work ================= -->
+    <section class="mt-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Professional work</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">Production WordPress multisite and static site work delivered as Web Content Coordinator at the Center for Inquiry.</p>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <article class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 transition hover:border-cyan-500/40">
+          <a href="https://csiconference.org/" class="block">
+            <img src="../images/CSICon-Landing-Page.png" alt="CSI Conference landing page" class="h-40 w-full object-cover object-top">
+            <div class="p-4">
+              <h3 class="text-base font-semibold text-slate-100 group-hover:text-cyan-400">CSIConference.org</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">Gatsby-based static site.</p>
+            </div>
+          </a>
+        </article>
+        <article class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 transition hover:border-cyan-500/40">
+          <a href="https://centerforinquiry.org/" class="block">
+            <img src="../images/CFI-LandingPage.png" alt="Center for Inquiry landing page" class="h-40 w-full object-cover object-top">
+            <div class="p-4">
+              <h3 class="text-base font-semibold text-slate-100 group-hover:text-cyan-400">centerforinquiry.org</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">WordPress multisite with custom themes and plugins.</p>
+            </div>
+          </a>
+        </article>
+        <article class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 transition hover:border-cyan-500/40">
+          <a href="https://skepticalinquirer.org/" class="block">
+            <img src="../images/SI-LandingPage.png" alt="Skeptical Inquirer landing page" class="h-40 w-full object-cover object-top">
+            <div class="p-4">
+              <h3 class="text-base font-semibold text-slate-100 group-hover:text-cyan-400">skepticalinquirer.org</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">WordPress multisite with custom themes and plugins.</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= sections ================= -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Browse by section</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        <a href="student-work.html" class="block rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100">Student work &mdash; 2016 onward</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">Course repositories from McHenry County College: Processing, C++, Java, PHP, and the HTML/CSS/JavaScript sequence. The oldest work in the account, preserved unedited.</p>
+          <p class="mt-3 text-xs uppercase tracking-[0.14em] text-slate-500">25 repositories &middot; 7 courses</p>
+        </a>
+        <a href="repositories.html" class="block rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100">All repositories</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">The complete code index by area &mdash; web apps, tooling and agents, systems, and archived experiments.</p>
+          <p class="mt-3 text-xs uppercase tracking-[0.14em] text-slate-500">github.com/aubreyjcook</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= personal projects ================= -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400/90">Personal projects</h2>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="portfolio/personal/school/school.html" class="hover:text-cyan-400">School work</a></h3>
+          <p class="mt-2 text-sm text-slate-400">Course projects, including the eighteen PRG 147 JavaScript exercises.</p>
+        </article>
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="portfolio/personal/reactjs/reactjs.html" class="hover:text-cyan-400">React.js</a></h3>
+          <p class="mt-2 text-sm text-slate-400">Personal React experiments and component-based projects.</p>
+        </article>
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="js-terminal/js-sandbox-terminal.html" class="hover:text-cyan-400">Sandbox terminal</a></h3>
+          <p class="mt-2 text-sm text-slate-400">A terminal that runs real JavaScript and compiled TypeScript demos in the page.</p>
+        </article>
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition hover:border-cyan-500/40">
+          <h3 class="text-base font-semibold text-slate-100"><a href="templates/index.html" class="hover:text-cyan-400">Page templates</a></h3>
+          <p class="mt-2 text-sm text-slate-400">Four starting points for new pages, with and without Tailwind utilities.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-lg font-semibold text-slate-100">Source</h2>
+      <p class="mt-3 text-sm leading-relaxed text-slate-300">Everything above is public. Repositories are linked individually throughout this section, and the whole account is browsable at once.</p>
+      <a href="https://github.com/aubreyjcook?tab=repositories" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center rounded-md bg-cyan-400 px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-300">github.com/aubreyjcook</a>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-800">
+    <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-8 text-center">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-slate-400">
+        <a class="transition hover:text-cyan-400" href="https://github.com/aubreyjcook" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="transition hover:text-cyan-400" href="https://www.linkedin.com/in/aubrey-cook-9b6922152/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="transition hover:text-cyan-400" href="mailto:aubreyjcook.contact@gmail.com">Send Email</a>
+      </div>
+      <p class="text-xs italic text-slate-500">“Computers are like old testament gods. Lots of rules, and no mercy.”</p>
+    </div>
+  </footer>
+  <script src="../js/site.js"></script>
+</body>
+</html>

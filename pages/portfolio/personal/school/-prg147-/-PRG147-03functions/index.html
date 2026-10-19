@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>JavaScript Functions</title>
+    <meta name="description" content="">
+    <meta name="author" content="Aubrey J Cook">
+
+    <!-- Meta Data
+  -------------------------------------------------- -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Prompt|Righteous" rel="stylesheet">
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="js/javascript.js"></script>
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>JavaScript functions</h1>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="row">
+                <div class="twelve columns">
+                    <p>A demonstration in the use of functions and the getElementByID class in Javascript to change an image on a click event.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <div class="right">
+                        <img id="large" src="images/picture01.jpg" alt="hare standing alert in the grass" />
+                        <p id="flavorText">Hare standing alert in the grass.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                   <p>You can click these images to change the photo above.</p>
+                    <div class="left">
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture01.jpg" alt="hare standing alert in the grass" height="125" title="hare standing alert in the grass" onclick="change01()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture02.jpg" alt="small brown bird standing on a fence" height="125" title="small brown bird standing on a fence" onclick="change02()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture03.jpg" alt="meadow path leading through the grass" height="125" title="meadow path leading through the grass" onclick="change03()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture04.jpg" alt="dragonfly landing on a sapling" height="125" title="dragonfly landing on a sapling" onclick="change04()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture05.jpg" alt="white dragonfly resting on a gray fallen tree" height="125" title="white dragonfly resting on a gray fallen tree" onclick="change05()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture06.jpg" alt="waterfront of a park lake" height="125" title="waterfront of a park lake" onclick="change06()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture07.jpg" alt="large brown toad sitting on pavement" height="125" title="large brown toad sitting on pavement" onclick="change07()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture08.jpg" alt="geese crowding around a waterfront in the grass" height="125" title="geese crowding around a waterfront in the grass" onclick="change08()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture09.jpg" alt="butterfly perched on a stem amidst blue flowers" height="125" title="butterfly perched on a stem amidst blue flowers" onclick="change09()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture10.jpg" alt="sundown over trees in a farm field" height="125" title="sundown over trees in a farm field" onclick="change10()" /></a>
+                            <br>
+                        </div>
+                        <div class="imageSelection">
+                            <a href="#large"><img src="images/picture11.jpg" alt="sundown over clouds behind a line of trees" height="125" title="sundown over clouds behind a line of trees" onclick="change11()" /></a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="row">
+                <div class="twelve columns">
+                    <a href="../index.html" class="button"> &#10096; PRG 147 index</a>
+                    <a href="http://aubreyjcook.com/" target="_blank">
+                        <h5>&copy; Aubrey J Cook, 2016</h5>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>

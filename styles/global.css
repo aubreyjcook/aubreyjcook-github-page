@@ -1,0 +1,2 @@
+/* Legacy entry. Primary chrome uses Tailwind + styles/site.css. */
+@import url('./site.css');
